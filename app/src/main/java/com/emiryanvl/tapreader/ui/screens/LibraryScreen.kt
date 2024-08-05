@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.emiryanvl.tapreader.NavRoutes
-import com.emiryanvl.tapreader.domain.models.BookModel
+import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.ui.viewModels.LibraryViewModel
 import kotlin.math.roundToInt
 import kotlin.random.Random
@@ -41,18 +41,15 @@ fun LibraryScreen(
     navController: NavController,
     viewModel: LibraryViewModel = hiltViewModel()
 ) {
-    val books by viewModel.books.collectAsState()
 
-    val tapOnCard: (String) -> Unit = {
-        navController.navigate(NavRoutes.BookScreen.route)
-    }
+    val bookList by viewModel.bookList.collectAsState()
+    
+    val tapOnBookCard: (String) -> Unit = { navController.navigate(NavRoutes.BookScreen.route) }
 
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {
-                    navController.navigate(NavRoutes.AddBookScreen.route)
-                }
+                onClick = { navController.navigate(NavRoutes.AddBookScreen.route) }
             ) {
                 Icon(
                     imageVector = Icons.Filled.Add,
@@ -61,10 +58,13 @@ fun LibraryScreen(
             }
         },
         floatingActionButtonPosition = FabPosition.End
-    ) {
-        LazyColumn(modifier = Modifier.padding(it)) {
+    ) { innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
             item {
-                DoubleColumn(list = books, onClick = tapOnCard)
+                DoubleColumn(
+                    list = bookList,
+                    onClick = tapOnBookCard
+                )
             }
         }
     }
@@ -72,22 +72,29 @@ fun LibraryScreen(
 
 @Composable
 fun DoubleColumn(
-    list: List<BookModel>,
+    list: List<Book>,
     onClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
+
     val firstHalf = list.subList(0, (list.size.toDouble() / 2).roundToInt())
     val secondHalf = list.subList(firstHalf.size, list.size)
 
     Row {
-        Column(Modifier.fillMaxWidth(0.5f)) {
+        Column(modifier = modifier.fillMaxWidth(0.5f)) {
             firstHalf.forEach {
-                BookCard(it.title, onClick)
+                BookCard(
+                    text = it.title,
+                    onClick = onClick
+                )
             }
         }
-
-        Column(Modifier.fillMaxWidth()) {
+        Column(modifier = modifier.fillMaxWidth()) {
             secondHalf.forEach {
-                BookCard(it.title, onClick)
+                BookCard(
+                    text = it.title,
+                    onClick = onClick
+                )
             }
         }
     }
@@ -96,10 +103,11 @@ fun DoubleColumn(
 @Composable
 fun BookCard(
     text: String,
-    onClick: (String) -> Unit
+    onClick: (String) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp)
             .background(
                 color = Color(

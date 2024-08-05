@@ -2,7 +2,7 @@ package com.emiryanvl.tapreader.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.emiryanvl.tapreader.domain.models.BookModel
+import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.domain.usecases.AddBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ class AddBookViewModel @Inject constructor(
 
     fun addBook(title: String, description: String) {
         viewModelScope.launch {
-            addBookUseCase(BookModel(title, description))
+            addBookUseCase(Book(title, description))
         }
     }
 }

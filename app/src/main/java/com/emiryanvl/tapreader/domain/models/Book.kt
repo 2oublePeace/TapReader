@@ -1,6 +1,6 @@
 package com.emiryanvl.tapreader.domain.models
 
-data class BookModel(
+data class Book(
     val title: String,
     val description: String,
 )

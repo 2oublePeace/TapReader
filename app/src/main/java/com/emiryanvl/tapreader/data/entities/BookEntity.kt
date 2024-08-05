@@ -2,7 +2,7 @@ package com.emiryanvl.tapreader.data.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.emiryanvl.tapreader.domain.models.BookModel
+import com.emiryanvl.tapreader.domain.models.Book
 
 @Entity(tableName = "book")
 data class BookEntity (
@@ -11,8 +11,8 @@ data class BookEntity (
     var title: String,
     var description: String,
 ) {
-    fun toBookModel(): BookModel {
-        return BookModel(
+    fun toBookModel(): Book {
+        return Book(
             title = this.title,
             description = this.description,
         )

@@ -34,8 +34,8 @@ fun AddBookScreen(
         ) {
             TextField(
                 value = title.value,
-                onValueChange = { text ->
-                    title.value = text
+                onValueChange = { newText ->
+                    title.value = newText
                 },
                 modifier = Modifier
                     .padding(8.dp)

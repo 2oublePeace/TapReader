@@ -36,10 +36,7 @@ fun Main() {
         ) {
             composable(NavRoutes.LibraryScreen.route) { LibraryScreen(navController) }
             composable(NavRoutes.AddBookScreen.route) { AddBookScreen(navController) }
-            composable(NavRoutes.BookScreen.route) {
-
-                BookScreen()
-            }
+            composable(NavRoutes.BookScreen.route) { BookScreen() }
         }
     }
 }
