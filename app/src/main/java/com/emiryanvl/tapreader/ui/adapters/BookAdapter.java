@@ -1,18 +1,21 @@
 package com.emiryanvl.tapreader.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.emiryanvl.tapreader.domain.model.Book;
 import com.emiryanvl.tapreader.R;
 
 import java.util.List;
+import java.util.Random;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
@@ -34,7 +37,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull BookAdapter.ViewHolder holder, int position) {
         Book book = bookList.get(position);
         holder.titleTextView.setText(book.getTitle());
-        holder.descriptionTextView.setText(book.getDescription());
     }
 
     @Override
@@ -44,12 +46,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView titleTextView;
-        final TextView descriptionTextView;
+        final CardView bookCardView;
 
         ViewHolder(View view) {
             super(view);
+            bookCardView = view.findViewById(R.id.bookCardView);
             titleTextView = view.findViewById(R.id.titleTextView);
-            descriptionTextView = view.findViewById(R.id.descriptionTextView);
+
+            Random random = new Random();
+            //TODO: Реализовать альфа-канал
+            bookCardView.setCardBackgroundColor(
+                Color.rgb(
+                    random.nextInt(255),
+                    random.nextInt(255),
+                    random.nextInt(255)
+                )
+            );
         }
     }
 }

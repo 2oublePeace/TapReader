@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -57,8 +58,10 @@ public class LibraryFragment extends Fragment {
         bookList.add(new Book("sdfsdf", "sdfsdfsdf"));
         bookList.add(new Book("sdfsdf", "sdfsdfsdf"));
 
+        GridLayoutManager manager = new GridLayoutManager(this.getContext(), 2);
         BookAdapter bookAdapter = new BookAdapter(bookList);
         RecyclerView bookRecyclerView = view.findViewById(R.id.bookRecyclerView);
+        bookRecyclerView.setLayoutManager(manager);
         bookRecyclerView.setAdapter(bookAdapter);
     }
 }
