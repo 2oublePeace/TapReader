@@ -1,6 +1,5 @@
 package com.emiryanvl.tapreader.ui.adapters;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.emiryanvl.tapreader.domain.model.Book;
 import com.emiryanvl.tapreader.R;
+import com.emiryanvl.tapreader.domain.model.Book;
 
 import java.util.List;
 import java.util.Random;
@@ -45,8 +44,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        final TextView titleTextView;
-        final CardView bookCardView;
+
+        final int RGB_MAX_VALUE = 255;
+
+        TextView titleTextView;
+        CardView bookCardView;
 
         ViewHolder(View view) {
             super(view);
@@ -56,11 +58,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             Random random = new Random();
             //TODO: Реализовать альфа-канал
             bookCardView.setCardBackgroundColor(
-                Color.rgb(
-                    random.nextInt(255),
-                    random.nextInt(255),
-                    random.nextInt(255)
-                )
+                    Color.rgb(
+                            random.nextInt(RGB_MAX_VALUE),
+                            random.nextInt(RGB_MAX_VALUE),
+                            random.nextInt(RGB_MAX_VALUE)
+                    )
             );
         }
     }
