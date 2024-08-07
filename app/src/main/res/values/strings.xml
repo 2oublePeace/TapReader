@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TapReader</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="titleEditTextPlaceholder">Название</string>
+    <string name="descriptionEditTextPlaceholder">Описание</string>
+    <string name="addBookButtonName">Добавить</string>
 </resources>
