@@ -11,8 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/titleEditTextPlaceholder"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="@string/titleEditTextPlaceholder"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -20,9 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/descriptionEditTextPlaceholder"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="@string/descriptionEditTextPlaceholder"
-        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText"/>
 
     <Button
         android:id="@+id/addBookButton"

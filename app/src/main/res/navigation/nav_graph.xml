@@ -14,9 +14,11 @@
             android:id="@+id/action_libraryFragment_to_addBookFragment"
             app:destination="@id/addBookFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/addBookFragment"
         android:name="com.emiryanvl.tapreader.ui.fragments.AddBookFragment"
         android:label="fragment_add_book"
         tools:layout="@layout/fragment_add_book" />
+
 </navigation>

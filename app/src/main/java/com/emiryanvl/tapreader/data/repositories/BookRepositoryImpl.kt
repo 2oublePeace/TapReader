@@ -8,6 +8,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class BookRepositoryImpl(private val dao: BookDao) : BookRepository {
+
+    override fun getAllBooks(): Flow<List<Book>> = dao.getAllBooks().map { list ->
+        list.map {
+            it.toBookModel()
+        }
+    }
+
     override suspend fun addBook(book: Book) {
         dao.insertBook(
             BookEntity(
@@ -18,12 +25,6 @@ class BookRepositoryImpl(private val dao: BookDao) : BookRepository {
     }
 
     override suspend fun getBook(id: Int): Book = dao.getBookById(id).toBookModel()
-
-    override fun getAllBooks(): Flow<List<Book>> = dao.getAllBooks().map { list ->
-        list.map {
-            it.toBookModel()
-        }
-    }
 
     override suspend fun updateBook(id: Int, book: Book) {
         val oldBook = dao.getBookById(id)

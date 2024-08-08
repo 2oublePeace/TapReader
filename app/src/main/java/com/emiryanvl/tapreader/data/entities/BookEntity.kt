@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import com.emiryanvl.tapreader.domain.models.Book
 
 @Entity(tableName = "book")
-data class BookEntity (
+data class BookEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     var title: String,
