@@ -5,6 +5,7 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+lifecycleRuntimeKtx = "2.8.4"
 appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.9.1"
@@ -19,6 +20,7 @@ hilt = "2.51.1"
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
@@ -36,4 +38,5 @@ google-dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = 
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp"}
+google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 

@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.google.dagger.hilt.android)
 }
 
 android {
@@ -46,6 +46,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
