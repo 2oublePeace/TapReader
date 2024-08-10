@@ -1,5 +1,6 @@
 package com.emiryanvl.tapreader.ui.adapters
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,9 +11,10 @@ import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
 import com.emiryanvl.tapreader.domain.models.Book
 import kotlin.random.Random
 
-class BookAdapter(
-    private val bookList: List<Book>
-) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
+@SuppressLint("NotifyDataSetChanged")
+class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
+
+    var bookList: List<Book> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
