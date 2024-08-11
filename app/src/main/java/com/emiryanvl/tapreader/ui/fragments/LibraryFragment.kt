@@ -1,6 +1,5 @@
 package com.emiryanvl.tapreader.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,16 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter
+import com.emiryanvl.tapreader.ui.adapters.BookDiffUtilCallback
 import com.emiryanvl.tapreader.ui.viewModels.LibraryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class LibraryFragment : Fragment() {
@@ -50,29 +52,30 @@ class LibraryFragment : Fragment() {
         initAddBookFloatingActionButton(navController)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun initBookRecyclerView() {
         val bookAdapter = BookAdapter()
         val layoutManager = GridLayoutManager(this.context, RECYCLER_VIEW_SPAN_COUNT)
+
         lifecycleScope.launch {
             viewModel.bookList
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
+                    val bookDiffUtilCallback = BookDiffUtilCallback(bookAdapter.bookList, it)
+                    val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
                     bookAdapter.bookList = it
-                    bookAdapter.notifyDataSetChanged()
+                    productDiffResult.dispatchUpdatesTo(bookAdapter)
                 }
         }
+
         with(binding) {
-            bookRecyclerView.layoutManager = layoutManager
             bookRecyclerView.adapter = bookAdapter
+            bookRecyclerView.layoutManager = layoutManager
         }
     }
 
     private fun initAddBookFloatingActionButton(navController: NavController) {
         binding.addBookfloatingActionButton.setOnClickListener {
-            navController.navigate(
-                R.id.action_libraryFragment_to_addBookFragment
-            )
+            navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
         }
     }
 

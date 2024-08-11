@@ -1,17 +1,16 @@
 package com.emiryanvl.tapreader.ui.adapters
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
 import com.emiryanvl.tapreader.domain.models.Book
 import kotlin.random.Random
 
-@SuppressLint("NotifyDataSetChanged")
 class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
     var bookList: List<Book> = emptyList()
@@ -51,5 +50,27 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
         companion object {
             private const val MAX_RGB_VALUE = 255
         }
+    }
+}
+
+class BookDiffUtilCallback(
+    private val newList: List<Book>,
+    private val oldList: List<Book>
+) : DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = oldList.size
+
+    override fun getNewListSize() = newList.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldBook = oldList[oldItemPosition]
+        val newBook = newList[newItemPosition]
+        return oldBook.title == newBook.title
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldBook = oldList[oldItemPosition]
+        val newBook = newList[newItemPosition]
+        return oldBook == newBook
     }
 }
