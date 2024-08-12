@@ -13,9 +13,11 @@ class AddBookViewModel @Inject constructor(
     private val addBookUseCase: AddBookUseCase
 ) : ViewModel() {
 
-    fun addBook(book: Book) {
+    fun addBook(title: String, description: String) {
         viewModelScope.launch {
-            addBookUseCase(book)
+            addBookUseCase(
+                Book(title, description)
+            )
         }
     }
 }

@@ -11,9 +11,9 @@ import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
 import com.emiryanvl.tapreader.domain.models.Book
 import kotlin.random.Random
 
-class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
-
+class BookAdapter(
     var bookList: List<Book> = emptyList()
+) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -51,26 +51,26 @@ class BookAdapter : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
             private const val MAX_RGB_VALUE = 255
         }
     }
-}
 
-class BookDiffUtilCallback(
-    private val newList: List<Book>,
-    private val oldList: List<Book>
-) : DiffUtil.Callback() {
+    class Callback(
+        private val newList: List<Book>,
+        private val oldList: List<Book>
+    ) : DiffUtil.Callback() {
 
-    override fun getOldListSize(): Int = oldList.size
+        override fun getOldListSize(): Int = oldList.size
 
-    override fun getNewListSize() = newList.size
+        override fun getNewListSize() = newList.size
 
-    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldBook = oldList[oldItemPosition]
-        val newBook = newList[newItemPosition]
-        return oldBook.title == newBook.title
-    }
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldBook = oldList[oldItemPosition]
+            val newBook = newList[newItemPosition]
+            return oldBook.title == newBook.title
+        }
 
-    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldBook = oldList[oldItemPosition]
-        val newBook = newList[newItemPosition]
-        return oldBook == newBook
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldBook = oldList[oldItemPosition]
+            val newBook = newList[newItemPosition]
+            return oldBook == newBook
+        }
     }
 }

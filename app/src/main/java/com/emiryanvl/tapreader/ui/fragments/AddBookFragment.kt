@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.emiryanvl.tapreader.databinding.FragmentAddBookBinding
-import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.ui.viewModels.AddBookViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddBookFragment : Fragment() {
 
     private var _binding: FragmentAddBookBinding? = null
-    private val binding get() = _binding!!
+    private val binding = _binding!!
 
     private val viewModel by viewModels<AddBookViewModel>()
 
@@ -27,8 +26,7 @@ class AddBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAddBookBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -46,10 +44,8 @@ class AddBookFragment : Fragment() {
         with(binding) {
             addBookButton.setOnClickListener {
                 viewModel.addBook(
-                    Book(
-                        title = titleEditText.text.toString(),
-                        description = descriptionEditText.text.toString()
-                    )
+                    title = titleEditText.text.toString(),
+                    description = descriptionEditText.text.toString()
                 )
                 navController.popBackStack()
             }

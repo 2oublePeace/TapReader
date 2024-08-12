@@ -16,17 +16,15 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter
-import com.emiryanvl.tapreader.ui.adapters.BookDiffUtilCallback
 import com.emiryanvl.tapreader.ui.viewModels.LibraryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
     private var _binding: FragmentLibraryBinding? = null
-    private val binding get() = _binding!!
+    private val binding = _binding!!
 
     private val viewModel by viewModels<LibraryViewModel>()
 
@@ -36,8 +34,7 @@ class LibraryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
@@ -60,7 +57,7 @@ class LibraryFragment : Fragment() {
             viewModel.bookList
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
-                    val bookDiffUtilCallback = BookDiffUtilCallback(bookAdapter.bookList, it)
+                    val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it)
                     val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
                     bookAdapter.bookList = it
                     productDiffResult.dispatchUpdatesTo(bookAdapter)
