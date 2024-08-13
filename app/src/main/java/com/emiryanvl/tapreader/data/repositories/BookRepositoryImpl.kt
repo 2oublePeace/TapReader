@@ -6,8 +6,9 @@ import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.domain.repositories.BookRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class BookRepositoryImpl(private val dao: BookDao) : BookRepository {
+class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRepository {
 
     override fun getAllBooks(): Flow<List<Book>> = dao.getAllBooks().map {
         it.map(BookEntity::toBookModel)

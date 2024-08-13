@@ -2,5 +2,5 @@
     <string name="app_name">TapReader</string>
     <string name="titleEditTextPlaceholder">Название</string>
     <string name="descriptionEditTextPlaceholder">Описание</string>
-    <string name="addBookButtonName">Добавить</string>
+    <string name="addBookButtonText">Добавить</string>
 </resources>

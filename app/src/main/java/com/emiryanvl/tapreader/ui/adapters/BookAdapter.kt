@@ -1,6 +1,7 @@
 package com.emiryanvl.tapreader.ui.adapters
 
 import android.graphics.Color
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -39,15 +40,22 @@ class BookAdapter(
             titleTextView.text = bookItem.title
 
             bookCardView.setCardBackgroundColor(
-                Color.rgb(
+                Color.argb(
+                    ALPHA_BACKGROUND_VALUE,
                     Random.nextInt(MAX_RGB_VALUE),
                     Random.nextInt(MAX_RGB_VALUE),
                     Random.nextInt(MAX_RGB_VALUE)
                 )
             )
+
+           // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+//                bookCardView.outlineSpotShadowColor = 0
+//                bookCardView.outlineAmbientShadowColor = 0
+//            }
         }
 
         companion object {
+            private const val ALPHA_BACKGROUND_VALUE = 64
             private const val MAX_RGB_VALUE = 255
         }
     }

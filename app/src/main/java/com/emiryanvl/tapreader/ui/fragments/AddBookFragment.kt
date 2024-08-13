@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AddBookFragment : Fragment() {
 
     private var _binding: FragmentAddBookBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel by viewModels<AddBookViewModel>()
 
