@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.domain.usecases.AddBookUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,11 +14,27 @@ class AddBookViewModel @Inject constructor(
     private val addBookUseCase: AddBookUseCase
 ) : ViewModel() {
 
-    fun addBook(title: String, description: String) {
+    private val uiState = MutableStateFlow(UiState())
+
+    fun bookTitleChanged(newText: String) {
+        uiState.value = uiState.value.copy(title = newText)
+    }
+
+    fun descriptionTitleChanged(newText: String) {
+        uiState.value = uiState.value.copy(description = newText)
+    }
+
+    fun addBook() {
         viewModelScope.launch {
             addBookUseCase(
-                Book(title, description)
+                Book(
+                    title = uiState.value.title, description = uiState.value.description
+                )
             )
         }
     }
 }
+
+data class UiState(
+    val title: String = "", val description: String = ""
+)

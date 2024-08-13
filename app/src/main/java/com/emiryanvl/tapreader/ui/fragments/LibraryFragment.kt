@@ -29,9 +29,7 @@ class LibraryFragment : Fragment() {
     private val viewModel by viewModels<LibraryViewModel>()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentLibraryBinding.inflate(inflater, container, false)
         return binding.root
@@ -45,18 +43,16 @@ class LibraryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
-        initBookRecyclerView()
-        initAddBookFloatingActionButton(navController)
+        bookRecyclerView()
+        addBookFloatingActionButton(navController)
     }
 
-    private fun initBookRecyclerView() {
+    private fun bookRecyclerView() {
         val bookAdapter = BookAdapter()
         val layoutManager = GridLayoutManager(this.context, RECYCLER_VIEW_SPAN_COUNT)
 
         lifecycleScope.launch {
-            viewModel.bookList
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect {
+            viewModel.bookList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
                     val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it)
                     val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
                     bookAdapter.bookList = it
@@ -64,13 +60,11 @@ class LibraryFragment : Fragment() {
                 }
         }
 
-        with(binding) {
-            bookRecyclerView.adapter = bookAdapter
-            bookRecyclerView.layoutManager = layoutManager
-        }
+        binding.bookRecyclerView.adapter = bookAdapter
+        binding.bookRecyclerView.layoutManager = layoutManager
     }
 
-    private fun initAddBookFloatingActionButton(navController: NavController) {
+    private fun addBookFloatingActionButton(navController: NavController) {
         binding.addBookfloatingActionButton.setOnClickListener {
             navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
         }
