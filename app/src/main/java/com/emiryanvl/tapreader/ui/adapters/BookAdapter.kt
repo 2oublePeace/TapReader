@@ -47,11 +47,6 @@ class BookAdapter(
                     Random.nextInt(MAX_RGB_VALUE)
                 )
             )
-
-           // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-//                bookCardView.outlineSpotShadowColor = 0
-//                bookCardView.outlineAmbientShadowColor = 0
-//            }
         }
 
         companion object {
@@ -61,8 +56,7 @@ class BookAdapter(
     }
 
     class Callback(
-        private val newList: List<Book>,
-        private val oldList: List<Book>
+        private val newList: List<Book>, private val oldList: List<Book>
     ) : DiffUtil.Callback() {
 
         override fun getOldListSize(): Int = oldList.size
