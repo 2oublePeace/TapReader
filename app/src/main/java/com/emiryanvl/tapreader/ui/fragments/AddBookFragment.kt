@@ -44,8 +44,16 @@ class AddBookFragment : Fragment() {
             viewModel.bookTitleChanged(it.toString())
         }
 
+        binding.authorEditText.addTextChangedListener {
+            viewModel.authorTitleChanged(it.toString())
+        }
+
         binding.descriptionEditText.addTextChangedListener {
             viewModel.descriptionTitleChanged(it.toString())
+        }
+
+        binding.genreEditText.addTextChangedListener {
+            viewModel.genreTitleChanged(it.toString())
         }
     }
 

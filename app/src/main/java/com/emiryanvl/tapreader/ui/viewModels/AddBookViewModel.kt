@@ -20,21 +20,35 @@ class AddBookViewModel @Inject constructor(
         uiState.value = uiState.value.copy(title = newText)
     }
 
+    fun authorTitleChanged(newText: String) {
+        uiState.value = uiState.value.copy(author = newText)
+    }
+
     fun descriptionTitleChanged(newText: String) {
         uiState.value = uiState.value.copy(description = newText)
+    }
+
+    fun genreTitleChanged(newText: String) {
+        uiState.value = uiState.value.copy(genre = newText)
     }
 
     fun addBook() {
         viewModelScope.launch {
             addBookUseCase(
                 Book(
-                    title = uiState.value.title, description = uiState.value.description
+                    title = uiState.value.title,
+                    description = uiState.value.description,
+                    genre = uiState.value.genre,
+                    author = uiState.value.author
                 )
             )
         }
     }
-}
 
-data class UiState(
-    val title: String = "", val description: String = ""
-)
+    data class UiState(
+        val title: String = "",
+        val description: String = "",
+        val genre: String = "",
+        val author: String = ""
+    )
+}

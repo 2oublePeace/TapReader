@@ -10,11 +10,15 @@ data class BookEntity(
     val id: Int = 0,
     var title: String,
     var description: String,
+    var genre: String,
+    var author: String
 ) {
     fun toBookModel(): Book {
         return Book(
             title = this.title,
             description = this.description,
+            genre = this.genre,
+            author = this.author
         )
     }
 }

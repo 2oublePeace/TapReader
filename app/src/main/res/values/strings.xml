@@ -3,4 +3,14 @@
     <string name="titleEditTextPlaceholder">Название</string>
     <string name="descriptionEditTextPlaceholder">Описание</string>
     <string name="addBookButtonText">Добавить</string>
+    <string name="recommendationBlockHeader">Рекомендовано для вас</string>
+    <string name="recommendationBlockDescription">Подобранно на основе ваших предпочтений в чтении.</string>
+    <string name="newReleasesBlockHeader">Новинки</string>
+    <string name="newReleasesBlockDescription">Недавно выпущенные книги, охватывающие различные жанры.</string>
+    <string name="image_book_desc">Обложка книги</string>
+    <string name="burger_menu_content_description">Боковое меню</string>
+    <string name="bell_notification_content_description">Уведомления</string>
+    <string name="add_book_floating_action_button_content_description">Кнопка добавления книги</string>
+    <string name="genreEditTextPlaceholder">Жанр</string>
+    <string name="authorEditTextPlaceholder">Автор</string>
 </resources>

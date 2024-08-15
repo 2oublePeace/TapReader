@@ -17,6 +17,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/authorEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/authorEditTextPlaceholder"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText"/>
+
+    <EditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +34,17 @@
         android:hint="@string/descriptionEditTextPlaceholder"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@+id/titleEditText"/>
+        app:layout_constraintTop_toBottomOf="@+id/authorEditText"/>
+
+    <EditText
+        android:id="@+id/genreEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/genreEditTextPlaceholder"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText"/>
 
     <Button
         android:id="@+id/addBookButton"
@@ -33,6 +53,6 @@
         android:text="@string/addBookButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/genreEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

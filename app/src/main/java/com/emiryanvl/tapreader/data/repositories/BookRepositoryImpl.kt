@@ -19,6 +19,8 @@ class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRep
             BookEntity(
                 title = book.title,
                 description = book.description,
+                genre = book.genre,
+                author = book.author
             )
         )
     }
@@ -31,6 +33,8 @@ class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRep
             oldBook.also {
                 it.title = book.title
                 it.description = book.description
+                it.genre = book.genre
+                it.author = book.author
             }
         )
     }

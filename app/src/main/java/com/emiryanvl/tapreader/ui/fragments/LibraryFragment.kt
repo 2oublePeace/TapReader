@@ -13,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter
@@ -49,7 +50,6 @@ class LibraryFragment : Fragment() {
 
     private fun bookRecyclerView() {
         val bookAdapter = BookAdapter()
-        val layoutManager = GridLayoutManager(this.context, RECYCLER_VIEW_SPAN_COUNT)
 
         lifecycleScope.launch {
             viewModel.bookList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
@@ -60,17 +60,13 @@ class LibraryFragment : Fragment() {
                 }
         }
 
-        binding.bookRecyclerView.adapter = bookAdapter
-        binding.bookRecyclerView.layoutManager = layoutManager
+        binding.recommendedBooksRecyclerView.adapter = bookAdapter
+        binding.newReleasesBooksRecyclerView.adapter = bookAdapter
     }
 
     private fun addBookFloatingActionButton(navController: NavController) {
         binding.addBookfloatingActionButton.setOnClickListener {
             navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
         }
-    }
-
-    companion object {
-        private const val RECYCLER_VIEW_SPAN_COUNT = 2
     }
 }

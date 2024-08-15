@@ -1,11 +1,10 @@
 package com.emiryanvl.tapreader.ui.adapters
 
 import android.graphics.Color
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
@@ -33,13 +32,13 @@ class BookAdapter(
         binding: FragmentLibraryBookItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val bookCardView: CardView = binding.bookCardView
+        private val bookImageView: ImageView = binding.bookImageView
         private val titleTextView: TextView = binding.titleTextView
+        private val authorTextView: TextView = binding.authorTextView
+        private val genreTextView: TextView = binding.genreTextView
 
-        fun bind(bookItem: Book) {
-            titleTextView.text = bookItem.title
-
-            bookCardView.setCardBackgroundColor(
+        init {
+            bookImageView.setBackgroundColor(
                 Color.argb(
                     ALPHA_BACKGROUND_VALUE,
                     Random.nextInt(MAX_RGB_VALUE),
@@ -47,6 +46,12 @@ class BookAdapter(
                     Random.nextInt(MAX_RGB_VALUE)
                 )
             )
+        }
+
+        fun bind(bookItem: Book) {
+            titleTextView.text = bookItem.title
+            authorTextView.text = bookItem.author
+            genreTextView.text = bookItem.genre
         }
 
         companion object {
@@ -59,7 +64,7 @@ class BookAdapter(
         private val newList: List<Book>, private val oldList: List<Book>
     ) : DiffUtil.Callback() {
 
-        override fun getOldListSize(): Int = oldList.size
+        override fun getOldListSize() = oldList.size
 
         override fun getNewListSize() = newList.size
 
