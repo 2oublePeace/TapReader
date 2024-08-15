@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRepository {
 
-    override fun getAllBooks(): Flow<List<Book>> = dao.getAllBooks().map {
+    override fun getAllBooks() = dao.getAllBooks().map {
         it.map(BookEntity::toBookModel)
     }
 
@@ -25,17 +25,17 @@ class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRep
         )
     }
 
-    override suspend fun getBook(id: Int): Book = dao.getBookById(id).toBookModel()
+    override suspend fun getBook(id: Int) = dao.getBookById(id).toBookModel()
 
     override suspend fun updateBook(id: Int, book: Book) {
         val oldBook = dao.getBookById(id)
         return dao.insertBook(
-            oldBook.also {
-                it.title = book.title
-                it.description = book.description
-                it.genre = book.genre
-                it.author = book.author
-            }
+            oldBook.copy (
+                title = book.title,
+                description = book.description,
+                genre = book.genre,
+                author = book.author,
+            )
         )
     }
 

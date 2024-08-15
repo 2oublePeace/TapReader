@@ -8,18 +8,16 @@ import com.emiryanvl.tapreader.domain.models.Book
 data class BookEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    var title: String,
-    var description: String,
-    var genre: String,
-    var author: String
+    val title: String,
+    val description: String,
+    val genre: String,
+    val author: String
 ) {
-    fun toBookModel(): Book {
-        return Book(
-            id = this.id,
-            title = this.title,
-            description = this.description,
-            genre = this.genre,
-            author = this.author
-        )
-    }
+    fun toBookModel() = Book(
+        id = this.id,
+        title = this.title,
+        description = this.description,
+        genre = this.genre,
+        author = this.author
+    )
 }
