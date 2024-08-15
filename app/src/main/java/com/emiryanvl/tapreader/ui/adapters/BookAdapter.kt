@@ -71,7 +71,7 @@ class BookAdapter(
         override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
             val oldBook = oldList[oldItemPosition]
             val newBook = newList[newItemPosition]
-            return oldBook.title == newBook.title
+            return oldBook.id == newBook.id
         }
 
         override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

@@ -15,6 +15,7 @@ data class BookEntity(
 ) {
     fun toBookModel(): Book {
         return Book(
+            id = this.id,
             title = this.title,
             description = this.description,
             genre = this.genre,
