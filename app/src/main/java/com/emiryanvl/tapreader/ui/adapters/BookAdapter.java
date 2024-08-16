@@ -2,15 +2,15 @@ package com.emiryanvl.tapreader.ui.adapters;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.emiryanvl.tapreader.R;
+import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding;
 import com.emiryanvl.tapreader.domain.model.Book;
 
 import java.util.List;
@@ -26,16 +26,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public BookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.library_recycler_view_item, parent, false);
-        return new ViewHolder(view);
+        FragmentLibraryBookItemBinding binding = FragmentLibraryBookItemBinding.inflate(inflater, parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Book book = bookList.get(position);
-        holder.titleTextView.setText(book.getTitle());
+        holder.bind(book);
     }
 
     @Override
@@ -46,24 +46,69 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         final int RGB_MAX_VALUE = 255;
+        final int ALPHA_BACKGROUND_VALUE = 64;
 
+        ImageView bookImageView;
         TextView titleTextView;
-        CardView bookCardView;
+        TextView authorTextView;
+        TextView genreTextView;
 
-        ViewHolder(View view) {
-            super(view);
-            bookCardView = view.findViewById(R.id.bookCardView);
-            titleTextView = view.findViewById(R.id.titleTextView);
-
+        ViewHolder(FragmentLibraryBookItemBinding binding) {
+            super(binding.getRoot());
+            bookImageView = binding.bookImageView;
+            titleTextView = binding.titleTextView;
+            authorTextView = binding.authorTextView;
+            genreTextView = binding.genreTextView;
             Random random = new Random();
-            //TODO: Реализовать альфа-канал
-            bookCardView.setCardBackgroundColor(
-                    Color.rgb(
+            bookImageView.setBackgroundColor(
+                    Color.argb(
+                            ALPHA_BACKGROUND_VALUE,
                             random.nextInt(RGB_MAX_VALUE),
                             random.nextInt(RGB_MAX_VALUE),
                             random.nextInt(RGB_MAX_VALUE)
                     )
             );
+        }
+
+        public void bind(Book book) {
+            titleTextView.setText(book.getTitle());
+            authorTextView.setText(book.getAuthor());
+            genreTextView.setText(book.getGenre());
+        }
+    }
+
+    public static class Callback extends DiffUtil.Callback {
+
+        List<Book> oldList;
+        List<Book> newList;
+
+        public Callback(List<Book> oldList, List<Book> newList) {
+            this.oldList = oldList;
+            this.newList = newList;
+        }
+
+        @Override
+        public int getOldListSize() {
+            return oldList.size();
+        }
+
+        @Override
+        public int getNewListSize() {
+            return newList.size();
+        }
+
+        @Override
+        public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
+            Book oldBook = oldList.get(oldItemPosition);
+            Book newBook = newList.get(newItemPosition);
+            return oldBook.getId() == newBook.getId();
+        }
+
+        @Override
+        public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
+            Book oldBook = oldList.get(oldItemPosition);
+            Book newBook = newList.get(newItemPosition);
+            return oldBook.equals(newBook);
         }
     }
 }

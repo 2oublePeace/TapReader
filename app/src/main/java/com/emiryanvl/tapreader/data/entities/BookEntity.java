@@ -1,27 +1,30 @@
-package com.emiryanvl.tapreader.domain.model;
+package com.emiryanvl.tapreader.data.entities;
 
-public class Book {
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.emiryanvl.tapreader.domain.model.Book;
+
+@Entity(tableName = "book")
+public class BookEntity {
+
+    public BookEntity(String title, String author, String description, String genre) {
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.genre = genre;
+    }
+
+    @PrimaryKey
     private int id;
+
     private String title;
+
     private String author;
+
     private String description;
+
     private String genre;
-
-    public Book(int id, String title, String author, String description, String genre) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.description = description;
-        this.genre = genre;
-    }
-
-    public Book(String title, String author, String description, String genre) {
-        this.title = title;
-        this.author = author;
-        this.description = description;
-        this.genre = genre;
-    }
 
     public int getId() {
         return id;
@@ -61,5 +64,9 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Book toBookModel() {
+        return new Book(this.id, this.title, this.author, this.description, this.genre);
     }
 }

@@ -11,26 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/title_edit_text_hint"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="@string/titleEditTextPlaceholder"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/authorEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/author_edit_text_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/titleEditText"/>
 
     <EditText
         android:id="@+id/descriptionEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/description_edit_text_hint"
+        android:importantForAutofill="no"
         android:inputType="text"
-        android:text="@string/descriptionEditTextPlaceholder"
-        app:layout_constraintTop_toBottomOf="@+id/titleEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/authorEditText"/>
+
+    <EditText
+        android:id="@+id/genreEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/genre_edit_text_placeholder"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText"/>
 
     <Button
         android:id="@+id/addBookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addBookButtonName"
+        android:text="@string/add_book_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/genreEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
