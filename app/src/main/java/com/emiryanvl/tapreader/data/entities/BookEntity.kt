@@ -20,4 +20,13 @@ data class BookEntity(
         genre = this.genre,
         author = this.author
     )
+
+    companion object {
+        fun toBookEntity(book: Book) = BookEntity(
+            title = book.title,
+            description = book.description,
+            author = book.author,
+            genre = book.genre
+        )
+    }
 }
