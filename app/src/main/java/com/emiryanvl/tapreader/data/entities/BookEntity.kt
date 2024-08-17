@@ -23,6 +23,7 @@ data class BookEntity(
 
     companion object {
         fun toBookEntity(book: Book) = BookEntity(
+            id = book.id,
             title = book.title,
             description = book.description,
             author = book.author,

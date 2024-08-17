@@ -15,20 +15,16 @@ class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRep
 
     override suspend fun addBook(book: Book) = dao.insertBook(BookEntity.toBookEntity(book))
 
-    override suspend fun updateBook(id: Int, book: Book) {
-        val oldBook = dao.findBookById(id).copy()
-        return dao.insertBook(
-            oldBook.copy(
-                title = book.title,
-                description = book.description,
-                genre = book.genre,
-                author = book.author,
-            )
+    override suspend fun updateBook(id: Int, book: Book) = dao.insertBook(
+        book = dao.findBookById(id).copy(
+            title = book.title,
+            author = book.author,
+            description = book.description,
+            genre = book.genre
         )
-    }
+    )
 
-    override suspend fun deleteBook(id: Int) {
-        val book = dao.findBookById(id)
-        dao.deleteBookById(book)
-    }
+    override suspend fun deleteBook(id: Int) = dao.deleteBookById(
+        book = dao.findBookById(id)
+    )
 }
