@@ -1,10 +1,12 @@
 package com.emiryanvl.tapreader.ui.adapters
 
 import android.graphics.Color
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
@@ -12,6 +14,7 @@ import com.emiryanvl.tapreader.domain.models.Book
 import kotlin.random.Random
 
 class BookAdapter(
+    private val navigateOnBookTap: (Bundle) -> Unit = {},
     var bookList: List<Book> = emptyList()
 ) : RecyclerView.Adapter<BookAdapter.ViewHolder>() {
 
@@ -26,10 +29,18 @@ class BookAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val bookItem = bookList[position]
         holder.bind(bookItem)
+        holder.itemView.setOnClickListener {
+            val bundle = bundleOf(BOOK_ID_ARG_PARAM to bookItem.id)
+            navigateOnBookTap(bundle)
+        }
+    }
+
+    companion object {
+        private const val BOOK_ID_ARG_PARAM = "bookId"
     }
 
     class ViewHolder(
-        binding: FragmentLibraryBookItemBinding
+        binding: FragmentLibraryBookItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val bookImageView: ImageView = binding.bookImageView

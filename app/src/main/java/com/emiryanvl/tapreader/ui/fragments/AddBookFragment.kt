@@ -30,31 +30,33 @@ class AddBookFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
         addBookButton(navController)
 
-        binding.titleEditText.addTextChangedListener {
-            viewModel.bookTitleChanged(it.toString())
-        }
+        with(binding) {
+            titleEditText.addTextChangedListener {
+                viewModel.titleChanged(it.toString())
+            }
 
-        binding.authorEditText.addTextChangedListener {
-            viewModel.authorTitleChanged(it.toString())
-        }
+            authorEditText.addTextChangedListener {
+                viewModel.authorChanged(it.toString())
+            }
 
-        binding.descriptionEditText.addTextChangedListener {
-            viewModel.descriptionTitleChanged(it.toString())
-        }
+            descriptionEditText.addTextChangedListener {
+                viewModel.descriptionChanged(it.toString())
+            }
 
-        binding.genreEditText.addTextChangedListener {
-            viewModel.genreTitleChanged(it.toString())
+            genreEditText.addTextChangedListener {
+                viewModel.genreChanged(it.toString())
+            }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun addBookButton(navController: NavController) {

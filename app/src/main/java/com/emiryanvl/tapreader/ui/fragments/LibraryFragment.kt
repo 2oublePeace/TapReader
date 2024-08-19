@@ -12,8 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter
@@ -36,32 +34,41 @@ class LibraryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val navController = Navigation.findNavController(view)
+        bookRecyclerView(navController)
+        addBookFloatingActionButton(navController)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navController = Navigation.findNavController(view)
-        bookRecyclerView()
-        addBookFloatingActionButton(navController)
-    }
+    private fun bookRecyclerView(navController: NavController) {
+        val navigateOnBookTap = { bundle: Bundle ->
+            navController.navigate(
+                R.id.action_libraryFragment_to_bookFragment,
+                bundle
+            )
+        }
 
-    private fun bookRecyclerView() {
-        val bookAdapter = BookAdapter()
+        val bookAdapter = BookAdapter(navigateOnBookTap)
 
         lifecycleScope.launch {
             viewModel.bookList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
-                    val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it)
-                    val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
-                    bookAdapter.bookList = it
-                    productDiffResult.dispatchUpdatesTo(bookAdapter)
-                }
+                val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it)
+                val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
+                bookAdapter.bookList = it
+                productDiffResult.dispatchUpdatesTo(bookAdapter)
+            }
         }
 
-        binding.recommendedBooksRecyclerView.adapter = bookAdapter
-        binding.newReleasesBooksRecyclerView.adapter = bookAdapter
+        with(binding) {
+            recommendedBooksRecyclerView.adapter = bookAdapter
+            newReleasesBooksRecyclerView.adapter = bookAdapter
+        }
     }
 
     private fun addBookFloatingActionButton(navController: NavController) {

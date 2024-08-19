@@ -13,15 +13,16 @@ data class BookEntity(
     val genre: String,
     val author: String
 ) {
-    fun toBookModel() = Book(
-        id = this.id,
-        title = this.title,
-        description = this.description,
-        genre = this.genre,
-        author = this.author
-    )
 
     companion object {
+        fun toBookModel(bookEntity: BookEntity) = Book(
+            id = bookEntity.id,
+            title = bookEntity.title,
+            description = bookEntity.description,
+            genre = bookEntity.genre,
+            author = bookEntity.author
+        )
+
         fun toBookEntity(book: Book) = BookEntity(
             id = book.id,
             title = book.title,

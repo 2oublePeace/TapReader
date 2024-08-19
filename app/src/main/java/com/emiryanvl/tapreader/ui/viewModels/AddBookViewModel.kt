@@ -16,19 +16,19 @@ class AddBookViewModel @Inject constructor(
 
     private val uiState = MutableStateFlow(UiState())
 
-    fun bookTitleChanged(newText: String) {
+    fun titleChanged(newText: String) {
         uiState.value = uiState.value.copy(title = newText)
     }
 
-    fun authorTitleChanged(newText: String) {
+    fun authorChanged(newText: String) {
         uiState.value = uiState.value.copy(author = newText)
     }
 
-    fun descriptionTitleChanged(newText: String) {
+    fun descriptionChanged(newText: String) {
         uiState.value = uiState.value.copy(description = newText)
     }
 
-    fun genreTitleChanged(newText: String) {
+    fun genreChanged(newText: String) {
         uiState.value = uiState.value.copy(genre = newText)
     }
 

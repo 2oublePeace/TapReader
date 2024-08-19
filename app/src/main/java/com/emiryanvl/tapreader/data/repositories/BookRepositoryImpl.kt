@@ -11,7 +11,7 @@ class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRep
 
     override fun getAllBooks() = dao.findAllBooks().map { it.map(BookEntity::toBookModel) }
 
-    override suspend fun getBook(id: Int) = dao.findBookById(id).toBookModel()
+    override suspend fun getBook(id: Int) = BookEntity.toBookModel(dao.findBookById(id))
 
     override suspend fun addBook(book: Book) = dao.insertBook(BookEntity.toBookEntity(book))
 
