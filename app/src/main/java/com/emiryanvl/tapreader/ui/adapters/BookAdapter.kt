@@ -63,11 +63,10 @@ class BookAdapter(
         fun bind(bookItem: Book) {
             titleTextView.text = bookItem.title
             authorTextView.text = bookItem.author
-            if(bookItem.genre == "null") {
-                genreTextView.isVisible = false
-            } else {
+            bookItem.genre?.let {
+                genreTextView.isVisible = true
                 genreTextView.text = bookItem.genre
-            }
+            } ?: let { genreTextView.isVisible = false }
         }
 
         companion object {
