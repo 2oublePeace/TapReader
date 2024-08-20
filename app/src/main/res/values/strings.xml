@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">TapReader</string>
-    <string name="titleEditTextPlaceholder">Название</string>
-    <string name="descriptionEditTextPlaceholder">Описание</string>
-    <string name="addBookButtonText">Добавить</string>
-    <string name="recommendationBlockHeader">Рекомендовано для вас</string>
-    <string name="recommendationBlockDescription">Подобранно на основе ваших предпочтений в чтении.</string>
-    <string name="newReleasesBlockHeader">Новинки</string>
-    <string name="newReleasesBlockDescription">Недавно выпущенные книги, охватывающие различные жанры.</string>
+    <string name="title_edit_text_placeholder">Название</string>
+    <string name="description_edit_text_placeholder">Описание</string>
+    <string name="add_book_button_text">Добавить</string>
+    <string name="recommendation_block_header">Рекомендовано для вас</string>
+    <string name="recommendation_block_description">Подобранно на основе ваших предпочтений в чтении.</string>
+    <string name="new_releases_block_header">Новинки</string>
+    <string name="new_releases_block_description">Недавно выпущенные книги, охватывающие различные жанры.</string>
     <string name="image_book_desc">Обложка книги</string>
     <string name="burger_menu_content_description">Боковое меню</string>
     <string name="bell_notification_content_description">Уведомления</string>
     <string name="add_book_floating_action_button_content_description">Кнопка добавления книги</string>
-    <string name="genreEditTextPlaceholder">Жанр</string>
-    <string name="authorEditTextPlaceholder">Автор</string>
+    <string name="genre_edit_text_placeholder">Жанр</string>
+    <string name="author_edit_text_placeholder">Автор</string>
     <string name="bookImageContentDescription">Обложка книги</string>
     <string name="burger_menu_image_view_content_description">Вернуться назад</string>
     <string name="description_header_text">О книге</string>

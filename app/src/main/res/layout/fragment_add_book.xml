@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/titleEditTextPlaceholder"
+        android:hint="@string/title_edit_text_placeholder"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/authorEditTextPlaceholder"
+        android:hint="@string/author_edit_text_placeholder"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/titleEditText"/>
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/descriptionEditTextPlaceholder"
+        android:hint="@string/description_edit_text_placeholder"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/authorEditText"/>
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/genreEditTextPlaceholder"
+        android:hint="@string/genre_edit_text_placeholder"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@+id/descriptionEditText"/>
@@ -50,7 +50,7 @@
         android:id="@+id/addBookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addBookButtonText"
+        android:text="@string/add_book_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genreEditText" />

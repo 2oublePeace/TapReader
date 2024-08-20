@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="20dp">
+    android:layout_marginEnd="@dimen/margin_size_medium">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bookCardView"
-        android:layout_width="182dp"
-        android:layout_height="251dp"
-        app:cardCornerRadius="5dp"
+        android:layout_width="@dimen/book_card_width"
+        android:layout_height="@dimen/book_card_height"
+        app:cardCornerRadius="@dimen/corner_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,8 +29,8 @@
             android:layout_gravity="end"
             android:background="@drawable/genre_background"
             android:fontFamily="@font/inter_medium"
-            android:padding="5dp"
-            android:textSize="13sp"
+            android:padding="@dimen/margin_size_extra_small"
+            android:textSize="@dimen/text_size_extra_small"
             tools:text="Роман" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_medium"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_size_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bookCardView"
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/inter_light"
-        android:textSize="13sp"
+        android:textSize="@dimen/text_size_extra_small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"

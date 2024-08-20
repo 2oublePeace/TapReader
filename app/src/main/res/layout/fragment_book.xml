@@ -8,13 +8,13 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/as_constraint"
         android:layout_height="wrap_content"
         android:background="?attr/colorBackgroundFloating"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:contentInsetEnd="0dp"
-        app:contentInsetStart="0dp"
+        app:contentInsetEnd="@dimen/as_constraint"
+        app:contentInsetStart="@dimen/as_constraint"
         app:layout_constraintEnd_toStartOf="@+id/fragmentBookEndGuideline"
         app:layout_constraintStart_toStartOf="@+id/fragmentBookStartGuideline"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +39,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="0dp"
+        android:layout_width="@dimen/as_constraint"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/fragmentBookStartGuideline"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -51,8 +51,8 @@
 
             <ImageView
                 android:id="@+id/bookImageView"
-                android:layout_width="217dp"
-                android:layout_height="295dp"
+                android:layout_width="@dimen/book_image_width"
+                android:layout_height="@dimen/book_image_height"
                 android:background="@color/black"
                 android:contentDescription="@string/bookImageContentDescription"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,10 +63,10 @@
                 android:id="@+id/titleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/margin_size_large"
                 android:textStyle="bold"
                 android:fontFamily="@font/inter_semibold"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size_extra_large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/bookImageView"
                 tools:text="Война и мир" />
@@ -75,18 +75,18 @@
                 android:id="@+id/authorTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/margin_size_small"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_size_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/titleTextView"
                 tools:text="Война и мир" />
 
             <View
-                android:id="@+id/line"
+                android:id="@+id/dividerLine"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_height="@dimen/divider_line_height"
+                android:layout_marginTop="@dimen/margin_size_medium"
                 android:background="@color/line"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/authorTextView"
@@ -96,20 +96,20 @@
                 android:id="@+id/descriptionHeaderTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/margin_size_medium"
                 android:fontFamily="@font/inter_medium"
-                android:textSize="16sp"
+                android:textSize="@dimen/text_size_medium"
                 android:text="@string/description_header_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/line" />
+                app:layout_constraintTop_toBottomOf="@id/dividerLine" />
 
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/margin_size_extra_small"
                 android:fontFamily="@font/inter_light"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_size_small"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/descriptionHeaderTextView"
                 tools:text="Описние книги" />
@@ -123,13 +123,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="25dp" />
+        app:layout_constraintGuide_begin="@dimen/root_margin_large" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/fragmentBookEndGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="25dp" />
+        app:layout_constraintGuide_end="@dimen/root_margin_large" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
