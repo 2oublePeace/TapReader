@@ -16,4 +16,9 @@
     <string name="bookImageContentDescription">Обложка книги</string>
     <string name="burger_menu_image_view_content_description">Вернуться назад</string>
     <string name="description_header_text">О книге</string>
+    <string name="genre_fiction">Фикшен</string>
+    <string name="genre_science_fiction">НФ</string>
+    <string name="genre_fantasy">Фэнтези</string>
+    <string name="genre_mystery">Детектив</string>
+    <string name="genre_biography">Биография</string>
 </resources>

@@ -8,12 +8,12 @@ class RemoteBookDataSourceImpl @Inject constructor(
     private val googleBooksApi: GoogleBooksApiService
 ) : RemoteBookDataSource {
     override suspend fun getFilteredBooks(query: String): List<Book> {
-        return googleBooksApi.getBooksByQuery("elizarov").body()?.items?.map { book ->
+        return googleBooksApi.getBooksByQuery(query).body()?.items?.map { book ->
             Book(
                 title = book.volumeInfo.title.toString(),
                 author = book.volumeInfo.authors.toString(),
                 description = book.volumeInfo.description.toString(),
-                genre = book.volumeInfo.categories?.toString()
+                genre = book.volumeInfo.categories?.joinToString(separator = ",")
             )
         } ?: emptyList()
     }

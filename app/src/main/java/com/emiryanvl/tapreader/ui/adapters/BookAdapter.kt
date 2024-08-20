@@ -1,5 +1,6 @@
 package com.emiryanvl.tapreader.ui.adapters
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
 import com.emiryanvl.tapreader.domain.models.Book
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlin.random.Random
 
 class BookAdapter(
@@ -41,7 +44,7 @@ class BookAdapter(
     }
 
     class ViewHolder(
-        binding: FragmentLibraryBookItemBinding,
+        private val binding: FragmentLibraryBookItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val bookImageView: ImageView = binding.bookImageView
@@ -65,8 +68,19 @@ class BookAdapter(
             authorTextView.text = bookItem.author
             bookItem.genre?.let {
                 genreTextView.isVisible = true
-                genreTextView.text = bookItem.genre
+                genreTextView.text = translateGenre(binding.root.context, bookItem.genre)
             } ?: let { genreTextView.isVisible = false }
+        }
+
+        private fun translateGenre(context: Context, englishGenre: String): String {
+            return when (englishGenre) {
+                "Fiction" -> context.getString(R.string.genre_fiction)
+                "Science Fiction" -> context.getString(R.string.genre_science_fiction)
+                "Fantasy" -> context.getString(R.string.genre_fantasy)
+                "Mystery" -> context.getString(R.string.genre_mystery)
+                "Biography" -> context.getString(R.string.genre_biography)
+                else -> englishGenre
+            }
         }
 
         companion object {

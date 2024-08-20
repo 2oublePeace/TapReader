@@ -20,7 +20,7 @@ class LibraryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _bookList.value = getFilteredBooksUseCase("elizarov")
+            _bookList.value = getFilteredBooksUseCase("Михаил Елизаров")
         }
     }
 }
