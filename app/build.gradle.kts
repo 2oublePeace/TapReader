@@ -67,4 +67,8 @@ dependencies {
     //Hilt
     implementation(libs.google.dagger.hilt)
     ksp(libs.google.dagger.hilt.compiler)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }

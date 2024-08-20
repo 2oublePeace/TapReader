@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBookItemBinding
@@ -62,7 +63,11 @@ class BookAdapter(
         fun bind(bookItem: Book) {
             titleTextView.text = bookItem.title
             authorTextView.text = bookItem.author
-            genreTextView.text = bookItem.genre
+            if(bookItem.genre == "null") {
+                genreTextView.isVisible = false
+            } else {
+                genreTextView.text = bookItem.genre
+            }
         }
 
         companion object {

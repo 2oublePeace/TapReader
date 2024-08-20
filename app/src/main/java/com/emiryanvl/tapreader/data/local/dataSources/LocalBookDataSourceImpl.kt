@@ -1,13 +1,12 @@
-package com.emiryanvl.tapreader.data.repositories
+package com.emiryanvl.tapreader.data.local.dataSources
 
-import com.emiryanvl.tapreader.data.dao.BookDao
-import com.emiryanvl.tapreader.data.entities.BookEntity
+import com.emiryanvl.tapreader.data.local.dao.BookDao
+import com.emiryanvl.tapreader.data.local.entities.BookEntity
 import com.emiryanvl.tapreader.domain.models.Book
-import com.emiryanvl.tapreader.domain.repositories.BookRepository
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class BookRepositoryImpl @Inject constructor(private val dao: BookDao) : BookRepository {
+class LocalBookDataSourceImpl @Inject constructor(private val dao: BookDao) : LocalBookDataSource {
 
     override fun getAllBooks() = dao.findAllBooks().map { it.map(BookEntity::toBookModel) }
 
