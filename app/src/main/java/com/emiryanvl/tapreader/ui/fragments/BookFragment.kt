@@ -41,7 +41,7 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
     }
 
     private fun setBookData() = with(binding) {
-        observeStateFlow(viewModel.uiState) {
+        observeFlow(viewModel.uiState) {
             titleTextView.text = it.title
             authorTextView.text = it.author
             descriptionTextView.text = it.description

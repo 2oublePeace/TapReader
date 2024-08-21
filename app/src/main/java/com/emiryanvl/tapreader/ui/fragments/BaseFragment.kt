@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
@@ -33,8 +33,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         _binding = null
     }
 
-    protected fun <T> observeStateFlow(
-        flow: StateFlow<T>,
+    protected fun <T> observeFlow(
+        flow: Flow<T>,
         state: Lifecycle.State = Lifecycle.State.STARTED,
         callback: (T) -> Unit
     ) {

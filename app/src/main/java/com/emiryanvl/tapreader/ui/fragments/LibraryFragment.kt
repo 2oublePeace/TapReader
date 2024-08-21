@@ -38,7 +38,7 @@ class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
 
         val bookAdapter = BookAdapter(navigateOnBookTap)
 
-        observeStateFlow(viewModel.uiState) {
+        observeFlow(viewModel.uiState) {
             val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it.bookList)
             val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
             bookAdapter.bookList = it.bookList
