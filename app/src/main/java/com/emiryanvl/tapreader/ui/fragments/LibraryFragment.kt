@@ -4,11 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
@@ -17,36 +13,22 @@ import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter
 import com.emiryanvl.tapreader.ui.viewModels.LibraryViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LibraryFragment : Fragment() {
-
-    private var _binding: FragmentLibraryBinding? = null
-    private val binding get() = _binding!!
+class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
 
     private val viewModel by viewModels<LibraryViewModel>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentLibraryBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navController = Navigation.findNavController(view)
         bookRecyclerView(navController)
-        addBookFloatingActionButton(navController)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    private fun bookRecyclerView(navController: NavController) {
+    private fun bookRecyclerView(navController: NavController) = with(binding) {
         val navigateOnBookTap = { bundle: Bundle ->
             navController.navigate(
                 R.id.action_libraryFragment_to_bookFragment,
@@ -56,24 +38,14 @@ class LibraryFragment : Fragment() {
 
         val bookAdapter = BookAdapter(navigateOnBookTap)
 
-        lifecycleScope.launch {
-            viewModel.bookList.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED).collect {
-                val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it)
-                val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
-                bookAdapter.bookList = it
-                productDiffResult.dispatchUpdatesTo(bookAdapter)
-            }
+        observeStateFlow(viewModel.uiState) {
+            val bookDiffUtilCallback = BookAdapter.Callback(bookAdapter.bookList, it.bookList)
+            val productDiffResult = DiffUtil.calculateDiff(bookDiffUtilCallback)
+            bookAdapter.bookList = it.bookList
+            productDiffResult.dispatchUpdatesTo(bookAdapter)
         }
 
-        with(binding) {
-            recommendedBooksRecyclerView.adapter = bookAdapter
-            newReleasesBooksRecyclerView.adapter = bookAdapter
-        }
-    }
-
-    private fun addBookFloatingActionButton(navController: NavController) {
-        binding.addBookfloatingActionButton.setOnClickListener {
-            navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
-        }
+        recommendedBooksRecyclerView.adapter = bookAdapter
+        newReleasesBooksRecyclerView.adapter = bookAdapter
     }
 }
