@@ -13,7 +13,7 @@
     <string name="add_book_floating_action_button_content_description">Кнопка добавления книги</string>
     <string name="genre_edit_text_placeholder">Жанр</string>
     <string name="author_edit_text_placeholder">Автор</string>
-    <string name="bookImageContentDescription">Обложка книги</string>
+    <string name="book_image_content_description">Обложка книги</string>
     <string name="burger_menu_image_view_content_description">Вернуться назад</string>
     <string name="description_header_text">О книге</string>
     <string name="genre_fiction">Фикшен</string>

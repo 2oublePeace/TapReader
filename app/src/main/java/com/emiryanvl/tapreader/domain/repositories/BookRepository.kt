@@ -7,7 +7,7 @@ interface BookRepository {
 
     fun getAllBooks(): Flow<List<Book>>
 
-    suspend fun getFilteredBooks(filter: String): List<Book>
+    fun getFilteredBooks(filter: String): Flow<List<Book>>
 
     suspend fun addBook(book: Book)
 

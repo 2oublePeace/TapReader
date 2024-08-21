@@ -47,12 +47,14 @@ class BookAdapter(
         private val binding: FragmentLibraryBookItemBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val bookImageView: ImageView = binding.bookImageView
-        private val titleTextView: TextView = binding.titleTextView
-        private val authorTextView: TextView = binding.authorTextView
-        private val genreTextView: TextView = binding.genreTextView
+        fun bind(bookItem: Book) = with(binding) {
+            titleTextView.text = bookItem.title
+            authorTextView.text = bookItem.author
+            bookItem.genre?.let {
+                genreTextView.isVisible = true
+                genreTextView.text = translateGenre(binding.root.context, bookItem.genre)
+            } ?: let { genreTextView.isVisible = false }
 
-        init {
             bookImageView.setBackgroundColor(
                 Color.argb(
                     ALPHA_BACKGROUND_VALUE,
@@ -61,15 +63,6 @@ class BookAdapter(
                     Random.nextInt(MAX_RGB_VALUE)
                 )
             )
-        }
-
-        fun bind(bookItem: Book) {
-            titleTextView.text = bookItem.title
-            authorTextView.text = bookItem.author
-            bookItem.genre?.let {
-                genreTextView.isVisible = true
-                genreTextView.text = translateGenre(binding.root.context, bookItem.genre)
-            } ?: let { genreTextView.isVisible = false }
         }
 
         private fun translateGenre(context: Context, englishGenre: String): String {

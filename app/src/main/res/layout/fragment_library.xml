@@ -18,7 +18,7 @@
         app:contentInsetStart="@dimen/as_constraint"
         app:layout_constraintStart_toStartOf="@id/fragmentLibraryStartGuideline"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/fragmentLibraryEndGuideline">
+        app:layout_constraintEnd_toEndOf="@id/fragmentLibraryEndGuideline">
 
         <ImageButton
             android:id="@+id/burgerMenuImageView"
@@ -132,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="386dp" />
+        app:layout_constraintGuide_begin="@dimen/root_margin_large" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/fragmentLibraryEndGuideline"

@@ -54,7 +54,7 @@
                 android:layout_width="@dimen/book_image_width"
                 android:layout_height="@dimen/book_image_height"
                 android:background="@color/black"
-                android:contentDescription="@string/bookImageContentDescription"
+                android:contentDescription="@string/book_image_content_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

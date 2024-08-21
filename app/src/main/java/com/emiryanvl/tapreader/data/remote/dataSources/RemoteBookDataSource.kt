@@ -1,8 +1,9 @@
 package com.emiryanvl.tapreader.data.remote.dataSources
 
 import com.emiryanvl.tapreader.domain.models.Book
+import kotlinx.coroutines.flow.Flow
 
 interface RemoteBookDataSource {
 
-    suspend fun getFilteredBooks(query: String): List<Book>
+    fun getQueryBooks(query: String): Flow<List<Book>>
 }
