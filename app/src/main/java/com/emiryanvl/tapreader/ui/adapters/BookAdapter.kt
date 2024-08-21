@@ -31,13 +31,13 @@ class BookAdapter(
         val bookItem = bookList[position]
         holder.bind(bookItem)
         holder.itemView.setOnClickListener {
-            val bundle = bundleOf(BOOK_ID_ARG_PARAM to bookItem.id)
+            val bundle = bundleOf(BOOK_ISBN_ARG_PARAM to bookItem.isbn)
             navigateOnBookTap(bundle)
         }
     }
 
     companion object {
-        private const val BOOK_ID_ARG_PARAM = "bookId"
+        private const val BOOK_ISBN_ARG_PARAM = "bookIsbn"
     }
 
     class ViewHolder(

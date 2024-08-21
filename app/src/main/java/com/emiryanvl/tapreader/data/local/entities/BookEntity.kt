@@ -11,7 +11,8 @@ data class BookEntity(
     val title: String,
     val description: String,
     val genre: String?,
-    val author: String
+    val author: String,
+    val isbn: String
 ) {
 
     companion object {
@@ -20,7 +21,8 @@ data class BookEntity(
             title = bookEntity.title,
             description = bookEntity.description,
             genre = bookEntity.genre,
-            author = bookEntity.author
+            author = bookEntity.author,
+            isbn = bookEntity.isbn
         )
 
         fun toBookEntity(book: Book) = BookEntity(
@@ -28,7 +30,8 @@ data class BookEntity(
             title = book.title,
             description = book.description,
             author = book.author,
-            genre = book.genre
+            genre = book.genre,
+            isbn = book.isbn
         )
     }
 }

@@ -22,8 +22,8 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            val bookId = it.getInt(BOOK_ID_ARG_PARAM)
-            viewModel.getBook(bookId)
+            val bookIsbn = it.getString(BOOK_ISBN_ARG_PARAM)
+            bookIsbn?.let { isbn -> viewModel.getBook(isbn) }
         }
     }
 
@@ -49,12 +49,12 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
     }
 
     companion object {
-        private const val BOOK_ID_ARG_PARAM = "bookId"
+        private const val BOOK_ISBN_ARG_PARAM = "bookIsbn"
 
         @JvmStatic
         fun newInstance(bookId: Int) = BookFragment().apply {
             arguments = Bundle().apply {
-                putInt(BOOK_ID_ARG_PARAM, bookId)
+                putInt(BOOK_ISBN_ARG_PARAM, bookId)
             }
         }
     }

@@ -17,7 +17,8 @@ class RemoteBookDataSourceImpl @Inject constructor(
                     title = book.volumeInfo.title.toString(),
                     author = book.volumeInfo.authors.toString(),
                     description = book.volumeInfo.description.toString(),
-                    genre = book.volumeInfo.categories?.joinToString(separator = ",")
+                    genre = book.volumeInfo.categories?.joinToString(separator = ","),
+                    isbn = book.volumeInfo.industryIdentifiers.first().identifier
                 )
             } ?: emptyList()
         )

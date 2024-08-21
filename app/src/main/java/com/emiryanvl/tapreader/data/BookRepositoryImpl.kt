@@ -13,7 +13,7 @@ class BookRepositoryImpl @Inject constructor(
 
     override fun getAllBooks() = localBookDataSource.getAllBooks()
 
-    override fun getFilteredBooks(filter: String) = remoteBookDataSource.getQueryBooks(filter)
+    override fun getQueryBooks(query: String) = remoteBookDataSource.getQueryBooks(query)
 
     override suspend fun addBook(book: Book) = localBookDataSource.addBook(book)
 
