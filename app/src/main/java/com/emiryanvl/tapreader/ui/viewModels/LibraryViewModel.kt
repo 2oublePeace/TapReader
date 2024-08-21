@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    private val getFilteredBooksUseCase: GetQueryBooksUseCase
+    private val getQueryBooksUseCase: GetQueryBooksUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -20,7 +20,7 @@ class LibraryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getFilteredBooksUseCase("Михаил Елизаров").collect {
+            getQueryBooksUseCase("Михаил Елизаров").collect {
                 _uiState.value = _uiState.value.copy(bookList = it)
             }
         }
