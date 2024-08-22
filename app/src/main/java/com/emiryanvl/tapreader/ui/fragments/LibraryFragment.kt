@@ -2,11 +2,8 @@ package com.emiryanvl.tapreader.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import com.emiryanvl.tapreader.R
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding
@@ -18,17 +15,14 @@ import dagger.hilt.android.AndroidEntryPoint
 class LibraryFragment : BaseFragment<FragmentLibraryBinding>() {
 
     private val viewModel by viewModels<LibraryViewModel>()
+    override val inflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentLibraryBinding =
+        FragmentLibraryBinding::inflate
 
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentLibraryBinding.inflate(inflater, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navController = Navigation.findNavController(view)
-        bookRecyclerView(navController)
+    override fun initializeViews() {
+        bookRecyclerView()
     }
 
-    private fun bookRecyclerView(navController: NavController) = with(binding) {
+    private fun bookRecyclerView() = with(binding) {
         val navigateOnBookTap = { bundle: Bundle ->
             navController.navigate(
                 R.id.action_libraryFragment_to_bookFragment,

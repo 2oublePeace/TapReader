@@ -2,11 +2,9 @@ package com.emiryanvl.tapreader.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.emiryanvl.tapreader.databinding.FragmentBookBinding
 import com.emiryanvl.tapreader.ui.viewModels.BookViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,9 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class BookFragment : BaseFragment<FragmentBookBinding>() {
 
     private val viewModel by viewModels<BookViewModel>()
-
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        FragmentBookBinding.inflate(inflater, container, false)
+    override val inflate: (LayoutInflater, ViewGroup?, Boolean) -> FragmentBookBinding =
+        FragmentBookBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +24,7 @@ class BookFragment : BaseFragment<FragmentBookBinding>() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val navController = Navigation.findNavController(view)
+    override fun initializeViews() {
         setBookData()
         backArrowButton(navController)
     }
