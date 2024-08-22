@@ -47,10 +47,12 @@ class BookAdapter(
         fun bind(bookItem: Book) = with(binding) {
             titleTextView.text = bookItem.title
             authorTextView.text = bookItem.author
-            bookItem.genre?.let {
+            if (bookItem.genre.isNullOrBlank()) {
+                genreTextView.isVisible = false
+            } else {
                 genreTextView.isVisible = true
                 genreTextView.text = translateGenre(binding.root.context, bookItem.genre)
-            } ?: let { genreTextView.isVisible = false }
+            }
 
             bookImageView.setBackgroundColor(
                 Color.argb(
