@@ -9,9 +9,9 @@ interface BookRepository {
 
     fun getQueryBooks(query: String): Flow<List<Book>>
 
-    suspend fun addBook(book: Book)
+    fun getBook(id: Int): Flow<Book>
 
-    suspend fun getBook(id: Int): Book
+    suspend fun addBook(book: Book)
 
     suspend fun updateBook(id: Int, book: Book)
 

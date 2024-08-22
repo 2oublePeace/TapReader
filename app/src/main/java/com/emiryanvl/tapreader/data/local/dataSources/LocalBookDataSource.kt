@@ -7,7 +7,7 @@ interface LocalBookDataSource {
 
     fun getAllBooks(): Flow<List<Book>>
 
-    suspend fun getBook(id: Int): Book
+    fun getBook(id: Int): Flow<Book>
 
     suspend fun addBook(book: Book)
 

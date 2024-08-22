@@ -3,6 +3,7 @@ package com.emiryanvl.tapreader.data.local.dataSources
 import com.emiryanvl.tapreader.data.local.dao.BookDao
 import com.emiryanvl.tapreader.data.local.entities.BookEntity
 import com.emiryanvl.tapreader.domain.models.Book
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -10,12 +11,12 @@ class LocalBookDataSourceImpl @Inject constructor(private val dao: BookDao) : Lo
 
     override fun getAllBooks() = dao.findAllBooks().map { it.map(BookEntity::toBookModel) }
 
-    override suspend fun getBook(id: Int) = BookEntity.toBookModel(dao.findBookById(id))
+    override fun getBook(id: Int) = dao.findBookById(id).map(BookEntity::toBookModel)
 
     override suspend fun addBook(book: Book) = dao.insertBook(BookEntity.toBookEntity(book))
 
     override suspend fun updateBook(id: Int, book: Book) = dao.insertBook(
-        book = dao.findBookById(id).copy(
+        book = dao.findBookById(id).first().copy(
             title = book.title,
             author = book.author,
             description = book.description,
@@ -24,6 +25,6 @@ class LocalBookDataSourceImpl @Inject constructor(private val dao: BookDao) : Lo
     )
 
     override suspend fun deleteBook(id: Int) = dao.deleteBookById(
-        book = dao.findBookById(id)
+        book = dao.findBookById(id).first()
     )
 }
