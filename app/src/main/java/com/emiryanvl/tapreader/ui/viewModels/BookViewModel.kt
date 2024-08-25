@@ -21,7 +21,8 @@ class BookViewModel @Inject constructor(
 
     fun getBook(isbn: String) = viewModelScope.launch {
         getQueryBooksUseCase("isbn:$isbn").collect {
-            val book = it.first()
+            //TODO будет доделано в рамках другой задачи
+            val book = it.firstOrNull() ?: throw Exception("")
             _uiState.value = _uiState.value.copy(
                 title = book.title,
                 description = book.description,
