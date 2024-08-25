@@ -15,10 +15,16 @@ data class VolumeInfo(
     val authors: List<String>?,
     val description: String?,
     val categories: List<String>?,
-    val industryIdentifiers: List<IndustryIdentifier>
+    val industryIdentifiers: List<IndustryIdentifier>,
+    val imageLinks: ImageLinks?
 )
 
 data class IndustryIdentifier(
     val type: String,
     val identifier: String
+)
+
+data class ImageLinks(
+    val smallThumbnail: String,
+    val thumbnail: String
 )

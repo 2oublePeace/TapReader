@@ -25,7 +25,8 @@ class BookViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(
                 title = book.title,
                 description = book.description,
-                author = book.author
+                author = book.author,
+                imageUri = book.imageUri
             )
         }
     }
@@ -33,6 +34,7 @@ class BookViewModel @Inject constructor(
     data class UiState(
         val title: String = "",
         val author: String = "",
-        val description: String = ""
+        val description: String = "",
+        val imageUri:String? = ""
     )
 }

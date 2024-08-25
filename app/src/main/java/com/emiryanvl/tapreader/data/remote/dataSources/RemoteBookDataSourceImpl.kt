@@ -12,13 +12,17 @@ class RemoteBookDataSourceImpl @Inject constructor(
 
     override fun getQueryBooks(query: String): Flow<List<Book>> = flow {
         emit(
-            googleBooksApi.getBooksByQuery(query).body()?.items?.map { book ->
+            googleBooksApi.getBooksByQuery(query).body()?.items?.map {
                 Book(
-                    title = book.volumeInfo.title.toString(),
-                    author = book.volumeInfo.authors.toString(),
-                    description = book.volumeInfo.description.toString(),
-                    genre = book.volumeInfo.categories?.joinToString(separator = ","),
-                    isbn = book.volumeInfo.industryIdentifiers.first().identifier
+                    title = it.volumeInfo.title.toString(),
+                    author = it.volumeInfo.authors?.joinToString(separator = ",") ?: "",
+                    description = it.volumeInfo.description.toString(),
+                    genre = it.volumeInfo.categories?.joinToString(separator = ","),
+                    isbn = it.volumeInfo.industryIdentifiers.first().identifier,
+                    imageUri = it.volumeInfo.imageLinks?.thumbnail?.replace(
+                        "http://",
+                        "https://"
+                    )
                 )
             } ?: emptyList()
         )
