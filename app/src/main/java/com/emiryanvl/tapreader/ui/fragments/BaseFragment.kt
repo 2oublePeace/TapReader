@@ -14,15 +14,15 @@ import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<VB : ViewBinding> : Fragment() {
+abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
-    private var _binding: VB? = null
-    protected val binding: VB get() = _binding!!
+    private var _binding: T? = null
+    protected val binding: T get() = _binding!!
 
     private var _navController: NavController? = null
     protected val navController: NavController get() = _navController!!
 
-    protected abstract val inflate: (LayoutInflater, ViewGroup?, Boolean) -> VB
+    protected abstract val inflate: (LayoutInflater, ViewGroup?, Boolean) -> T
 
     override fun onCreateView(
         inflater: LayoutInflater,
