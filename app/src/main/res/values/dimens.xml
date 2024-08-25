@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TextSize -->
+    <dimen name="text_size_extra_small">13.sp</dimen>
+    <dimen name="text_size_small">14.sp</dimen>
+    <dimen name="text_size_medium">16.sp</dimen>
+    <dimen name="text_size_large">18.sp</dimen>
+    <dimen name="text_size_extra_large">24.sp</dimen>
+
+    <!-- PaddingSize -->
+    <dimen name="padding_size_extra_small">6.dp</dimen>
+    <dimen name="padding_size_small">10.dp</dimen>
+    <dimen name="padding_size_medium">21.dp</dimen>
+    <dimen name="padding_size_large">30.dp</dimen>
+    <dimen name="padding_size_extra_large">35.dp</dimen>
+    <dimen name="padding_root_size_small">20.dp</dimen>
+    <dimen name="padding_root_size_large">25.dp</dimen>
+
+    <!-- LibraryScreen -->
+    <dimen name="book_list_image_corner_radius">5.dp</dimen>
+    <dimen name="book_list_genre_corner_radius">5.dp</dimen>
+    <dimen name="book_list_card_width">182.dp</dimen>
+    <dimen name="book_card_height">251.dp</dimen>
+
+    <!-- BookScreen -->
+    <dimen name="book_image_width">217.dp</dimen>
+    <dimen name="book_image_height">295.dp</dimen>
+    <dimen name="divider_line_height">1.dp</dimen>
+
+    <!-- BottomBar -->
+    <dimen name="bottom_bar_width">375.dp</dimen>
+    <dimen name="bottom_bar_height">60.dp</dimen>
+</resources>
