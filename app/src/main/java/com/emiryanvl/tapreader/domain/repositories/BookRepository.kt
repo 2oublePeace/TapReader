@@ -7,7 +7,9 @@ interface BookRepository {
 
     fun getAllBooks(): Flow<List<Book>>
 
-    fun getQueryBooks(query: String): Flow<List<Book>>
+    fun getBooksByQuery(query: String): Flow<List<Book>>
+
+    fun getBooksBySubject(subject: String): Flow<List<Book>>
 
     fun getBook(id: Int): Flow<Book>
 

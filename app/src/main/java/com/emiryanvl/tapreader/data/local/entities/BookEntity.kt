@@ -9,10 +9,10 @@ data class BookEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val title: String,
-    val description: String,
-    val genre: String?,
     val author: String,
-    val isbn: String
+    val description: String,
+    val genre: String? = null,
+    val isbn: String? = null
 ) {
 
     companion object {

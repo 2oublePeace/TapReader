@@ -1,6 +1,8 @@
 package com.emiryanvl.tapreader.di
 
+import com.emiryanvl.tapreader.core.Constants
 import com.emiryanvl.tapreader.data.remote.apiServices.GoogleBooksApiService
+import com.emiryanvl.tapreader.data.remote.apiServices.OpenLibraryApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,11 +16,14 @@ class NetworkModule {
     @Provides
     fun provideGoogleBooksApi(): GoogleBooksApiService = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(GOOGLE_BOOKS_API_BASE_URL)
+        .baseUrl(Constants.GOOGLE_BOOKS_API_BASE_URL)
         .build()
         .create(GoogleBooksApiService::class.java)
 
-    companion object {
-        private const val GOOGLE_BOOKS_API_BASE_URL = "https://www.googleapis.com/books/v1/"
-    }
+    @Provides
+    fun provideOpenLibraryApi(): OpenLibraryApiService = Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create())
+        .baseUrl(Constants.OPEN_LIBRARY_API_BASE_URL)
+        .build()
+        .create(OpenLibraryApiService::class.java)
 }

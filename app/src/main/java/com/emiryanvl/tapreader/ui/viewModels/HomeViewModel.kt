@@ -3,7 +3,8 @@ package com.emiryanvl.tapreader.ui.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.emiryanvl.tapreader.domain.models.Book
-import com.emiryanvl.tapreader.domain.usecases.GetQueryBooksUseCase
+import com.emiryanvl.tapreader.domain.usecases.GetBooksByQueryUseCase
+import com.emiryanvl.tapreader.domain.usecases.GetBooksBySubject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,8 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LibraryViewModel @Inject constructor(
-    private val getQueryBooksUseCase: GetQueryBooksUseCase
+class HomeViewModel @Inject constructor(
+    private val getBooksBySubject: GetBooksBySubject
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiState())
@@ -20,7 +21,7 @@ class LibraryViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getQueryBooksUseCase("Михаил Елизаров").collect {
+            getBooksBySubject("fiction").collect {
                 _uiState.value = _uiState.value.copy(bookList = it)
             }
         }

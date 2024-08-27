@@ -4,6 +4,7 @@ import com.emiryanvl.tapreader.data.local.dataSources.LocalBookDataSource
 import com.emiryanvl.tapreader.data.remote.dataSources.RemoteBookDataSource
 import com.emiryanvl.tapreader.domain.models.Book
 import com.emiryanvl.tapreader.domain.repositories.BookRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class BookRepositoryImpl @Inject constructor(
@@ -13,7 +14,9 @@ class BookRepositoryImpl @Inject constructor(
 
     override fun getAllBooks() = localBookDataSource.getAllBooks()
 
-    override fun getQueryBooks(query: String) = remoteBookDataSource.getQueryBooks(query)
+    override fun getBooksByQuery(query: String) = remoteBookDataSource.getBooksByQuery(query)
+
+    override fun getBooksBySubject(subject: String) = remoteBookDataSource.getBooksBySubject(subject)
 
     override fun getBook(id: Int) = localBookDataSource.getBook(id)
 

@@ -1,6 +1,6 @@
 package com.emiryanvl.tapreader.data.remote.apiServices
 
-import com.emiryanvl.tapreader.data.remote.responses.GoogleBookApiResponse
+import com.emiryanvl.tapreader.data.remote.responses.google.GoogleBookApiResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

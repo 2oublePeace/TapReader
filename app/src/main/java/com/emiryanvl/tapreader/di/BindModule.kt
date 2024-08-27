@@ -3,8 +3,8 @@ package com.emiryanvl.tapreader.di
 import com.emiryanvl.tapreader.data.BookRepositoryImpl
 import com.emiryanvl.tapreader.data.local.dataSources.LocalBookDataSource
 import com.emiryanvl.tapreader.data.local.dataSources.LocalBookDataSourceImpl
+import com.emiryanvl.tapreader.data.remote.dataSources.OpenLibraryDataSourceImpl
 import com.emiryanvl.tapreader.data.remote.dataSources.RemoteBookDataSource
-import com.emiryanvl.tapreader.data.remote.dataSources.RemoteBookDataSourceImpl
 import com.emiryanvl.tapreader.domain.repositories.BookRepository
 import dagger.Binds
 import dagger.Module
@@ -26,6 +26,6 @@ interface BindModule {
 
     @Binds
     fun bindRemoteDataSourceImplToRemoteDataSource(
-        remoteBookDataSourceImpl: RemoteBookDataSourceImpl
+        openLibrarySubjectDataSourceImpl: OpenLibraryDataSourceImpl
     ): RemoteBookDataSource
 }
