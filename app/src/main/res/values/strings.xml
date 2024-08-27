@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">TapReader</string>
 
-    <!-- LibraryScreen -->
+    <!-- HomeScreen -->
     <string name="recommendation_block_header">Рекомендовано для вас</string>
     <string name="recommendation_block_description">Подобранно на основе ваших предпочтений в чтении.</string>
     <string name="new_releases_block_header">Новинки</string>
     <string name="new_releases_block_description">Недавно выпущенные книги, охватывающие различные жанры.</string>
     <string name="book_list_item_image_content_description">Обложка книги</string>
-    <string name="add_book_floating_action_button_content_description">Кнопка добавления книги</string>
+    <string name="add_book_fab_content_description">Кнопка добавления книги</string>
 
     <!-- TopBar -->
     <string name="burger_menu_icon_content_description">Боковое меню</string>
@@ -18,6 +18,9 @@
     <string name="home_page_icon_content_description">Перейти на главную страниу</string>
     <string name="search_icon_content_description">Открыть поиск</string>
     <string name="library_icon_content_description">Открыть библиотеку</string>
+    <string name="home_image_button_text">Главная</string>
+    <string name="search_image_button_text">Поиск</string>
+    <string name="library_image_button_text">Библиотека</string>
 
     <!-- BookScreem -->
     <string name="book_image_content_description">Обложка книги</string>
@@ -29,4 +32,5 @@
     <string name="genre_fantasy">Фэнтези</string>
     <string name="genre_mystery">Детектив</string>
     <string name="genre_biography">Биография</string>
+    <string name="about_book_text">О книге</string>
 </resources>
