@@ -20,7 +20,7 @@ class DatabaseModule {
             .fallbackToDestructiveMigration()
             .build()
 
-    @Provides
+    @[Provides Singleton]
     fun provideBookDao(appDatabase: AppDatabase): BookDao = appDatabase.bookDao()
 
     companion object {
