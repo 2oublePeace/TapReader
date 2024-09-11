@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Observable;
+
 public class GetAllBooksUseCase {
 
     BookRepository repository;
@@ -16,7 +18,7 @@ public class GetAllBooksUseCase {
         this.repository = repository;
     }
 
-    public List<Book> invoke() {
+    public Observable<List<Book>> execute() {
         return repository.getAllBooks();
     }
 }

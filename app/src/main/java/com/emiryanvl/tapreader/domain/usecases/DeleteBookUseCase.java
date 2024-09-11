@@ -13,7 +13,7 @@ public class DeleteBookUseCase {
         this.repository = repository;
     }
 
-    public void invoke(int id) {
+    public void execute(int id) {
         repository.deleteBook(id);
     }
 }

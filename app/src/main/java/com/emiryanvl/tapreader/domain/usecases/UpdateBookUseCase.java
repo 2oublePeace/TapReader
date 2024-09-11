@@ -14,7 +14,7 @@ public class UpdateBookUseCase {
         this.repository = repository;
     }
 
-    public void invoke(int id, Book book) {
+    public void execute(int id, Book book) {
         repository.updateBook(id, book);
     }
 }

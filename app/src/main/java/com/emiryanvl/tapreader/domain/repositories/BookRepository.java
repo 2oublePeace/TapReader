@@ -4,12 +4,16 @@ import com.emiryanvl.tapreader.domain.model.Book;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
+
 public interface BookRepository {
-    List<Book> getAllBooks();
+    Observable<List<Book>> getAllBooks();
 
-    Book getBook(int id);
+    Observable<Book> getBook(int id);
 
-    void addBook(Book book);
+    Completable addBook(Book book);
 
     void updateBook(int id, Book book);
 

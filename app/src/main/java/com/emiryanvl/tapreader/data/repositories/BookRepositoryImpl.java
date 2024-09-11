@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
+
 public class BookRepositoryImpl implements BookRepository {
 
     BookDao bookDao;
@@ -19,35 +23,36 @@ public class BookRepositoryImpl implements BookRepository {
         this.bookDao = bookDao;
     }
 
-
     @Override
-    public List<Book> getAllBooks() {
+    public Observable<List<Book>> getAllBooks() {
         return bookDao.findAll()
-                .stream()
-                .map(BookEntity::toBookModel)
-                .collect(Collectors.toList());
+            .map(bookEntities -> {
+                return bookEntities.stream()
+                    .map(BookEntity::toBookModel)
+                    .collect(Collectors.toList());
+            });
     }
 
     @Override
-    public Book getBook(int id) {
-        return bookDao.findById(id).toBookModel();
+    public Observable<Book> getBook(int id) {
+        return bookDao.findById(id).map(bookEntity -> bookEntity.toBookModel());
     }
 
     @Override
-    public void addBook(Book book) {
-        bookDao.insert(
-                new BookEntity(
-                        book.getTitle(),
-                        book.getAuthor(),
-                        book.getDescription(),
-                        book.getGenre()
-                )
+    public Completable addBook(Book book) {
+        return bookDao.insert(
+            new BookEntity(
+                book.getTitle(),
+                book.getAuthor(),
+                book.getDescription(),
+                book.getGenre()
+            )
         );
     }
 
     @Override
     public void updateBook(int id, Book book) {
-        BookEntity bookEntity = bookDao.findById(id);
+        BookEntity bookEntity = bookDao.findById(id).blockingFirst();
         bookEntity.setTitle(book.getTitle());
         bookEntity.setAuthor(book.getAuthor());
         bookEntity.setDescription(book.getDescription());
@@ -56,7 +61,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public void deleteBook(int id) {
-        BookEntity book = bookDao.findById(id);
+        BookEntity book = bookDao.findById(id).blockingFirst();
         bookDao.delete(book);
     }
 }

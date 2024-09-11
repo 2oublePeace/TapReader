@@ -10,16 +10,19 @@ import com.emiryanvl.tapreader.data.entities.BookEntity;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Observable;
+
 @Dao
 public interface BookDao {
     @Query("SELECT * FROM book")
-    List<BookEntity> findAll();
+    Observable<List<BookEntity>> findAll();
 
     @Query("SELECT * FROM book WHERE id = :id")
-    BookEntity findById(int id);
+    Observable<BookEntity> findById(int id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(BookEntity book);
+    Completable insert(BookEntity book);
 
     @Delete
     void delete(BookEntity book);

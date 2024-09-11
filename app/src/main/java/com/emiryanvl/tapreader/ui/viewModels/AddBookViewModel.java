@@ -17,6 +17,6 @@ public class AddBookViewModel extends ViewModel {
     }
 
     public void addBook(Book book) {
-        new Thread(() -> addBookUseCase.invoke(book)).start();
+        new Thread(() -> addBookUseCase.execute(book)).start();
     }
 }

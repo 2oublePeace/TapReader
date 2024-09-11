@@ -5,6 +5,8 @@ import com.emiryanvl.tapreader.domain.repositories.BookRepository;
 
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Completable;
+
 public class AddBookUseCase {
 
     BookRepository repository;
@@ -14,7 +16,7 @@ public class AddBookUseCase {
         this.repository = repository;
     }
 
-    public void invoke(Book book) {
-        repository.addBook(book);
+    public Completable execute(Book book) {
+        return repository.addBook(book);
     }
 }

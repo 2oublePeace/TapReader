@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.emiryanvl.tapreader.App;
 import com.emiryanvl.tapreader.R;
 import com.emiryanvl.tapreader.databinding.FragmentLibraryBinding;
+import com.emiryanvl.tapreader.domain.model.Book;
 import com.emiryanvl.tapreader.ui.adapters.BookAdapter;
 import com.emiryanvl.tapreader.ui.viewModels.LibraryViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -40,6 +44,7 @@ public class LibraryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.appComponent().inject(this);
+        viewModel.getAllBooks();
     }
 
     @Override
@@ -63,15 +68,19 @@ public class LibraryFragment extends Fragment {
     private void recyclerView() {
         RecyclerView recommendedBooksRecyclerView = binding.recommendedBooksRecyclerView;
         RecyclerView newReleasesBooksRecyclerView = binding.newReleasesBooksRecyclerView;
-        BookAdapter bookAdapter = new BookAdapter(viewModel.getAllBooks());
-        recommendedBooksRecyclerView.setAdapter(bookAdapter);
-        newReleasesBooksRecyclerView.setAdapter(bookAdapter);
+
+        viewModel.bookList.observe(this, object -> {
+            List<Book> list = viewModel.bookList.getValue();
+            BookAdapter bookAdapter = new BookAdapter(list);
+            recommendedBooksRecyclerView.setAdapter(bookAdapter);
+            newReleasesBooksRecyclerView.setAdapter(bookAdapter);
+        });
     }
 
     private void floatingActionButton() {
         FloatingActionButton addBookfloatingActionButton = binding.addBookfloatingActionButton;
         addBookfloatingActionButton.setOnClickListener(
-                button -> navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
+            button -> navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
         );
     }
 }
