@@ -13,12 +13,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewbinding.ViewBinding;
 
-public abstract class BaseFragment<T extends ViewBinding, V extends Fragment> extends Fragment {
+public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
 
     protected T binding;
     protected NavController navController;
 
-    protected abstract BindingInflater<T> getBinding();
+    protected abstract Inflater<T> getInflater();
 
     @Override
     public View onCreateView(
@@ -26,7 +26,7 @@ public abstract class BaseFragment<T extends ViewBinding, V extends Fragment> ex
         ViewGroup container,
         Bundle savedInstanceState
     ) {
-        binding = getBinding().inflate(inflater, container, false);
+        binding = getInflater().inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -39,17 +39,8 @@ public abstract class BaseFragment<T extends ViewBinding, V extends Fragment> ex
 
     protected void initializeViews() {}
 
-    protected <U> void observeData(LiveData<U> liveData, LiveDataObserver observer) {
-        liveData.observe(this, object -> observer.callback());
-    }
-
     @FunctionalInterface
-    protected interface LiveDataObserver {
-        void callback();
-    }
-
-    @FunctionalInterface
-    protected interface BindingInflater<T> {
+    protected interface Inflater<T> {
         T inflate(LayoutInflater inflater, ViewGroup container, boolean attachToParrent);
     }
 }

@@ -16,13 +16,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class LibraryFragment extends BaseFragment<FragmentLibraryBinding, LibraryFragment> {
+public class LibraryFragment extends BaseFragment<FragmentLibraryBinding> {
 
     @Inject
     LibraryViewModel viewModel;
 
     @Override
-    protected BindingInflater<FragmentLibraryBinding> getBinding() {
+    protected Inflater<FragmentLibraryBinding> getInflater() {
         return FragmentLibraryBinding::inflate;
     }
 
@@ -43,7 +43,7 @@ public class LibraryFragment extends BaseFragment<FragmentLibraryBinding, Librar
         RecyclerView recommendedBooksRecyclerView = binding.recommendedBooksRecyclerView;
         RecyclerView newReleasesBooksRecyclerView = binding.newReleasesBooksRecyclerView;
 
-        observeData(viewModel.subjectBooks, () -> {
+        viewModel.subjectBooks.observe(getViewLifecycleOwner(), object -> {
             List<Book> list = viewModel.subjectBooks.getValue();
             BookAdapter bookAdapter = new BookAdapter(list);
             recommendedBooksRecyclerView.setAdapter(bookAdapter);
