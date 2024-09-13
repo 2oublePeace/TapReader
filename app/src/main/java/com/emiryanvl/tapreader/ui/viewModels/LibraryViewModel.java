@@ -1,7 +1,5 @@
 package com.emiryanvl.tapreader.ui.viewModels;
 
-import android.annotation.SuppressLint;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -15,13 +13,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class LibraryViewModel extends ViewModel {
 
-    private GetAllBooksUseCase getAllBooksUseCase;
-    private GetBookUseCase getBookUseCase;
-    private GetBooksBySubjectUseCase getBooksBySubjectUseCase;
+    private final GetAllBooksUseCase getAllBooksUseCase;
+    private final GetBookUseCase getBookUseCase;
+    private final GetBooksBySubjectUseCase getBooksBySubjectUseCase;
     public MutableLiveData<List<Book>> bookList = new MutableLiveData<>();
     public MutableLiveData<Book> book = new MutableLiveData<>();
     public MutableLiveData<List<Book>> subjectBooks = new MutableLiveData<>();
@@ -38,7 +37,7 @@ public class LibraryViewModel extends ViewModel {
     }
 
     public void getAllBooks() {
-        getAllBooksUseCase.execute()
+        Disposable disposable = getAllBooksUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(list -> {
@@ -47,7 +46,7 @@ public class LibraryViewModel extends ViewModel {
     }
 
     public void getBook() {
-        getBookUseCase.execute(1)
+        Disposable disposable = getBookUseCase.execute(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(bookItem -> {
@@ -56,11 +55,11 @@ public class LibraryViewModel extends ViewModel {
     }
 
     public void getBooksBySubject() {
-        getBooksBySubjectUseCase.execute("fiction")
+        Disposable disposable = getBooksBySubjectUseCase.execute("fiction")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(sb -> {
-               subjectBooks.setValue(sb);
+                subjectBooks.setValue(sb);
             });
     }
 }

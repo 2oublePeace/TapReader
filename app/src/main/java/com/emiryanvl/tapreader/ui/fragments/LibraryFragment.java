@@ -43,9 +43,8 @@ public class LibraryFragment extends BaseFragment<FragmentLibraryBinding> {
         RecyclerView recommendedBooksRecyclerView = binding.recommendedBooksRecyclerView;
         RecyclerView newReleasesBooksRecyclerView = binding.newReleasesBooksRecyclerView;
 
-        viewModel.subjectBooks.observe(getViewLifecycleOwner(), object -> {
-            List<Book> list = viewModel.subjectBooks.getValue();
-            BookAdapter bookAdapter = new BookAdapter(list);
+        viewModel.subjectBooks.observe(getViewLifecycleOwner(), bookList -> {
+            BookAdapter bookAdapter = new BookAdapter(bookList);
             recommendedBooksRecyclerView.setAdapter(bookAdapter);
             newReleasesBooksRecyclerView.setAdapter(bookAdapter);
         });
