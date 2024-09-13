@@ -1,21 +1,17 @@
-package com.emiryanvl.tapreader.domain.repositories;
+package com.emiryanvl.tapreader.data.local.dataSources;
 
 import com.emiryanvl.tapreader.domain.model.Book;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
-public interface BookRepository {
+public interface LocalBookDataSource {
+
     Observable<List<Book>> getAllBooks();
 
     Observable<Book> getBook(int id);
-
-    Observable<List<Book>> getBooksByQuery(String query);
-
-    Observable<List<Book>> getBooksBySubject(String subject);
 
     Completable addBook(Book book);
 

@@ -52,4 +52,13 @@ dependencies {
     //RxJava
     implementation libs.rxjava
     implementation libs.rxandroid
+
+    //Retrofit
+    implementation libs.retrofit
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.11.0'
+    implementation libs.converter.gson
+
+    //OkHttp
+    implementation libs.okHttp
+    implementation libs.okHttpLogging
 }

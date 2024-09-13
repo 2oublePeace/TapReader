@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.core.Completable;
 
 public class AddBookUseCase {
 
-    BookRepository repository;
+    private final BookRepository repository;
 
     @Inject
     public AddBookUseCase(BookRepository repository) {

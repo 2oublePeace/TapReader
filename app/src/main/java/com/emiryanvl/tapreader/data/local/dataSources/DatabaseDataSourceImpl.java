@@ -1,9 +1,8 @@
-package com.emiryanvl.tapreader.data.repositories;
+package com.emiryanvl.tapreader.data.local.dataSources;
 
-import com.emiryanvl.tapreader.data.dao.BookDao;
-import com.emiryanvl.tapreader.data.entities.BookEntity;
+import com.emiryanvl.tapreader.data.local.dao.BookDao;
+import com.emiryanvl.tapreader.data.local.entities.BookEntity;
 import com.emiryanvl.tapreader.domain.model.Book;
-import com.emiryanvl.tapreader.domain.repositories.BookRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,15 +10,14 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 
-public class BookRepositoryImpl implements BookRepository {
+public class DatabaseDataSourceImpl implements LocalBookDataSource {
 
     BookDao bookDao;
 
     @Inject
-    public BookRepositoryImpl(BookDao bookDao) {
+    public DatabaseDataSourceImpl(BookDao bookDao) {
         this.bookDao = bookDao;
     }
 
@@ -35,7 +33,7 @@ public class BookRepositoryImpl implements BookRepository {
 
     @Override
     public Observable<Book> getBook(int id) {
-        return bookDao.findById(id).map(bookEntity -> bookEntity.toBookModel());
+        return bookDao.findById(id).map(BookEntity::toBookModel);
     }
 
     @Override

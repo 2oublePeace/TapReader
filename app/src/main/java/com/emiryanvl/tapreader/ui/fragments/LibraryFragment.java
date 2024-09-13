@@ -1,17 +1,7 @@
 package com.emiryanvl.tapreader.ui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.emiryanvl.tapreader.App;
@@ -26,41 +16,25 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-public class LibraryFragment extends Fragment {
+public class LibraryFragment extends BaseFragment<FragmentLibraryBinding, LibraryFragment> {
 
     @Inject
     LibraryViewModel viewModel;
-    private FragmentLibraryBinding binding;
-    private NavController navController;
 
-    public static LibraryFragment newInstance() {
-        LibraryFragment fragment = new LibraryFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+    @Override
+    protected BindingInflater<FragmentLibraryBinding> getBinding() {
+        return FragmentLibraryBinding::inflate;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.appComponent().inject(this);
-        viewModel.getAllBooks();
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
-        binding = FragmentLibraryBinding.inflate(inflater, container, false);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        navController = Navigation.findNavController(view);
+    protected void initializeViews() {
+        viewModel.getBooksBySubject();
         recyclerView();
         floatingActionButton();
     }
@@ -69,8 +43,8 @@ public class LibraryFragment extends Fragment {
         RecyclerView recommendedBooksRecyclerView = binding.recommendedBooksRecyclerView;
         RecyclerView newReleasesBooksRecyclerView = binding.newReleasesBooksRecyclerView;
 
-        viewModel.bookList.observe(this, object -> {
-            List<Book> list = viewModel.bookList.getValue();
+        observeData(viewModel.subjectBooks, () -> {
+            List<Book> list = viewModel.subjectBooks.getValue();
             BookAdapter bookAdapter = new BookAdapter(list);
             recommendedBooksRecyclerView.setAdapter(bookAdapter);
             newReleasesBooksRecyclerView.setAdapter(bookAdapter);
@@ -82,5 +56,12 @@ public class LibraryFragment extends Fragment {
         addBookfloatingActionButton.setOnClickListener(
             button -> navController.navigate(R.id.action_libraryFragment_to_addBookFragment)
         );
+    }
+
+    public static LibraryFragment newInstance() {
+        LibraryFragment fragment = new LibraryFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

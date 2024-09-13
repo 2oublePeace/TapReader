@@ -5,9 +5,10 @@ import android.content.Context;
 import androidx.room.Room;
 
 import com.emiryanvl.tapreader.App;
-import com.emiryanvl.tapreader.data.AppDatabase;
-import com.emiryanvl.tapreader.data.dao.BookDao;
-import com.emiryanvl.tapreader.data.repositories.BookRepositoryImpl;
+import com.emiryanvl.tapreader.data.local.AppDatabase;
+import com.emiryanvl.tapreader.data.local.dao.BookDao;
+import com.emiryanvl.tapreader.data.BookRepositoryImpl;
+import com.emiryanvl.tapreader.data.local.dataSources.LocalBookDataSource;
 import com.emiryanvl.tapreader.domain.repositories.BookRepository;
 
 import javax.inject.Singleton;
@@ -27,22 +28,13 @@ public class DataModule {
     @Provides
     AppDatabase provideAppDatabase(Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, "tap_reader_database")
-                .fallbackToDestructiveMigration()
-                .build();
+            .fallbackToDestructiveMigration()
+            .build();
     }
 
+    @Singleton
     @Provides
     BookDao provideBookDao(AppDatabase appDatabase) {
         return appDatabase.bookDao();
-    }
-
-    @Provides
-    BookRepositoryImpl provideBookRepositoryImpl(BookDao bookDao) {
-        return new BookRepositoryImpl(bookDao);
-    }
-
-    @Provides
-    BookRepository provideBookRepository(BookRepositoryImpl bookRepositoryImpl) {
-        return bookRepositoryImpl;
     }
 }

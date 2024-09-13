@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Observable;
 
 public class GetAllBooksUseCase {
 
-    BookRepository repository;
+    private final BookRepository repository;
 
     @Inject
     public GetAllBooksUseCase(BookRepository repository) {

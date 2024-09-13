@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 public class DeleteBookUseCase {
 
-    BookRepository repository;
+    private final BookRepository repository;
 
     @Inject
     public DeleteBookUseCase(BookRepository repository) {

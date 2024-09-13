@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.emiryanvl.tapreader.domain.model.Book;
-import com.emiryanvl.tapreader.domain.usecases.AddBookUseCase;
 import com.emiryanvl.tapreader.domain.usecases.GetAllBooksUseCase;
 import com.emiryanvl.tapreader.domain.usecases.GetBookUseCase;
+import com.emiryanvl.tapreader.domain.usecases.GetBooksBySubjectUseCase;
 
 import java.util.List;
 
@@ -21,36 +21,25 @@ public class LibraryViewModel extends ViewModel {
 
     private GetAllBooksUseCase getAllBooksUseCase;
     private GetBookUseCase getBookUseCase;
-    private AddBookUseCase addBookUseCase;
+    private GetBooksBySubjectUseCase getBooksBySubjectUseCase;
     public MutableLiveData<List<Book>> bookList = new MutableLiveData<>();
     public MutableLiveData<Book> book = new MutableLiveData<>();
+    public MutableLiveData<List<Book>> subjectBooks = new MutableLiveData<>();
 
     @Inject
     public LibraryViewModel(
         GetAllBooksUseCase getAllBooksUseCase,
         GetBookUseCase getBookUseCase,
-        AddBookUseCase addBookUseCase
+        GetBooksBySubjectUseCase getBooksBySubjectUseCase
     ) {
         this.getAllBooksUseCase = getAllBooksUseCase;
         this.getBookUseCase = getBookUseCase;
-        this.addBookUseCase = addBookUseCase;
+        this.getBooksBySubjectUseCase = getBooksBySubjectUseCase;
     }
 
-    public void addBook() {
-        addBookUseCase.execute(new Book(
-                "asdasd",
-                "asdsad",
-                "asdasd",
-                "asdasd"
-            ))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread()).subscribe();
-    }
-
-    @SuppressLint("CheckResult")
     public void getAllBooks() {
         getAllBooksUseCase.execute()
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(list -> {
                 bookList.setValue(list);
@@ -63,6 +52,15 @@ public class LibraryViewModel extends ViewModel {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(bookItem -> {
                 book.setValue(bookItem);
+            });
+    }
+
+    public void getBooksBySubject() {
+        getBooksBySubjectUseCase.execute("fiction")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(sb -> {
+               subjectBooks.setValue(sb);
             });
     }
 }

@@ -28,7 +28,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        FragmentLibraryBookItemBinding binding = FragmentLibraryBookItemBinding.inflate(inflater, parent, false);
+        FragmentLibraryBookItemBinding binding =
+            FragmentLibraryBookItemBinding.inflate(inflater, parent, false);
         return new ViewHolder(binding);
     }
 
@@ -61,12 +62,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder> {
             genreTextView = binding.genreTextView;
             Random random = new Random();
             bookImageView.setBackgroundColor(
-                    Color.argb(
-                            ALPHA_BACKGROUND_VALUE,
-                            random.nextInt(RGB_MAX_VALUE),
-                            random.nextInt(RGB_MAX_VALUE),
-                            random.nextInt(RGB_MAX_VALUE)
-                    )
+                Color.argb(
+                    ALPHA_BACKGROUND_VALUE,
+                    random.nextInt(RGB_MAX_VALUE),
+                    random.nextInt(RGB_MAX_VALUE),
+                    random.nextInt(RGB_MAX_VALUE)
+                )
             );
         }
 

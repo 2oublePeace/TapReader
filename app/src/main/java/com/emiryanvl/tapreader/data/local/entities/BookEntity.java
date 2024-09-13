@@ -1,4 +1,4 @@
-package com.emiryanvl.tapreader.data.entities;
+package com.emiryanvl.tapreader.data.local.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

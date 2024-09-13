@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 public class UpdateBookUseCase {
 
-    BookRepository repository;
+    private final BookRepository repository;
 
     @Inject
     public UpdateBookUseCase(BookRepository repository) {
