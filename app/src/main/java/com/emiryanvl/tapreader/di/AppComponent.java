@@ -2,6 +2,7 @@ package com.emiryanvl.tapreader.di;
 
 import com.emiryanvl.tapreader.App;
 import com.emiryanvl.tapreader.MainActivity;
+import com.emiryanvl.tapreader.ui.fragments.BaseFragment;
 import com.emiryanvl.tapreader.ui.fragments.LibraryFragment;
 
 import javax.inject.Singleton;
